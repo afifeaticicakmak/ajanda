@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1040, minimum-scale=0.2, maximum-scale=5, user-scalable=yes">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin" />
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+<style>
+body { margin:0; }
+doc-page:not(:defined) { visibility:hidden; }
+a { color:inherit; text-decoration:none; }
+a:hover { color:#5a7fa3; }
+input::placeholder, textarea::placeholder { color:#cfccc9; }
+@page { size: 1040px 1387px; margin: 0; }
+@media print {
+  doc-page > section.page { width:1040px !important; height:1387px !important; overflow:hidden !important; break-inside:avoid !important; }
+}
+</style>
+<script src="./doc-page.js"></script>
+<link rel="manifest" href="./manifest.webmanifest" />
+<meta name="theme-color" content="#f4efe3" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="Ajanda" />
+<link rel="icon" type="image/png" sizes="512x512" href="./ikon2-512.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="./ikon2-192.png" />
+<link rel="apple-touch-icon" sizes="192x192" href="./ikon2-192.png" />
+<link rel="apple-touch-icon" sizes="512x512" href="./ikon2-512.png" />
+<link rel="mask-icon" href="./ikon2-192.png" color="#8a7526" />
+<script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("./sw.js").catch(function(){});});}</script>
+<script src="./ajanda-bulut.js"></script>
+</helmet>
+
+<doc-page width="1040px" height="1387px" style="font-family:Lora,serif;color:#201e1d"><sc-for list="{{ haftalar }}" as="p" hint-placeholder-count="9"><section class="page" id="{{ p.id }}" style="position:relative;background:#fdfcfa;overflow:hidden">
+    <sc-for list="{{ p.fotolar }}" as="f" hint-placeholder-count="0">
+      <span style="position:absolute;left:{{ f.sol }};top:{{ f.ust }};width:{{ f.en }};z-index:{{ f.z }};cursor:move;transform:{{ f.aci }};transform-origin:50% 50%" onMouseDown="{{ f.bas }}" onMouseEnter="{{ f.gir }}" onMouseLeave="{{ f.cik }}">
+        <span style="display:block">{{ f.gorsel }}</span>
+        <span onClick="{{ f.sil }}" style="position:absolute;right:-9px;top:-9px;width:20px;height:20px;border-radius:50%;background:#fdfcfa;border:1px solid #cfccc9;display:flex;align-items:center;justify-content:center;font:400 13px Lora,serif;color:#8d8a87;cursor:pointer;opacity:{{ f.tut }};transition:opacity 0.12s">×</span><span onMouseDown="{{ f.boyut }}" style="position:absolute;right:-8px;bottom:-8px;width:18px;height:18px;border-radius:50%;background:#fdfcfa;border:1px solid #cfccc9;display:flex;align-items:center;justify-content:center;font:400 11px Lora,serif;color:#8d8a87;cursor:nwse-resize;opacity:{{ f.tut }};transition:opacity 0.12s">⤢</span><span onMouseDown="{{ f.don }}" style="position:absolute;left:-8px;bottom:-8px;width:18px;height:18px;border-radius:50%;background:#fdfcfa;border:1px solid #cfccc9;display:flex;align-items:center;justify-content:center;font:400 11px Lora,serif;color:#8d8a87;cursor:grab;opacity:{{ f.tut }};transition:opacity 0.12s">↻</span>
+      </span>
+    </sc-for>
+    <span style="position:absolute;right:14px;top:86px;z-index:6;display:flex;gap:6px"><span onClick="{{ p.stickerEkle }}" style="padding:4px 11px;border:1px solid #e0cdbd;border-radius:12px;background:#fdfcfa;font:400 11px Lora,serif;letter-spacing:0.06em;color:#c4885b;cursor:pointer">＋ STICKER</span><span onClick="{{ p.fotoEkle }}" style="padding:4px 11px;border:1px solid #cfccc9;border-radius:12px;background:#fdfcfa;font:400 11px Lora,serif;letter-spacing:0.06em;color:#8d8a87;cursor:pointer">＋ FOTOĞRAF</span></span>
+
+    <div style="position:absolute;left:0;right:0;top:0;height:74px;display:flex;align-items:stretch;background:#faf8f5;border-bottom:1px solid #e6e2df">
+      <sc-for list="{{ sekHafta }}" as="s" hint-placeholder-count="8">
+        <a href="{{ s.href }}" style="flex:1;position:relative;overflow:hidden;background:{{ s.renk }};border:2px solid #fdfcfa;box-shadow:{{ s.ic }};opacity:{{ s.op }}"><span style="position:absolute;inset:0;background-image:url({{ s.mg }});background-size:cover;background-position:50% 50%;opacity:0.62;mix-blend-mode:multiply"></span><span style="position:absolute;inset:0;background:{{ s.renk }};opacity:0.3"></span></a>
+      </sc-for>
+    </div>
+    <div style="position:absolute;left:0;top:74px;bottom:62px;width:78px;background:#f6f4f1;border-right:1px solid #e6e2df;display:flex;flex-direction:column">
+      <sc-for list="{{ p.yan }}" as="y" hint-placeholder-count="9">
+        <a href="{{ y.href }}" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;border-bottom:1px solid #eae7e3;background:{{ y.bg }}">
+          <span style="font:400 18px Lora,serif;color:{{ y.fg }}">{{ y.no }}</span>
+          <span style="font:400 10px Lora,serif;color:#a9a6a3">hafta</span>
+        </a>
+      </sc-for>
+    </div>
+    <div style="position:absolute;left:78px;right:0;top:74px;bottom:62px;padding:22px 26px;display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid #201e1d;min-height:70px;padding:0 16px 6px;border-radius:8px 8px 0 0;background-image:linear-gradient(90deg,rgba(253,252,250,0.95) 0%,rgba(253,252,250,0.46) 55%,rgba(253,252,250,0.88) 100%),url(bant-5.png);background-size:auto,cover;background-position:50% 50%,50% 50%;background-repeat:no-repeat">
+        <span style="display:flex;align-items:baseline;gap:14px">
+          <span style="font:400 34px Lora,serif;letter-spacing:-0.01em">{{ p.baslik }}</span>
+          <span style="font:400 17px Lora,serif;color:#6e6b68">{{ p.aralik }}</span>
+        </span>
+        <span style="font:400 13px Lora,serif;letter-spacing:0.14em;color:#a89ac4">HAFTA</span>
+      </div>
+      <div style="flex:none;height:184px;display:flex;gap:16px">
+        <div style="width:216px;flex:none;display:flex;flex-direction:column">
+          <a href="{{ p.ayHref }}" style="font:400 11px Lora,serif;letter-spacing:0.1em;color:#8d8a87;padding-bottom:5px">{{ p.ayAd }}</a>
+          <div style="flex:1;display:grid;grid-template-columns:repeat(7,1fr);grid-auto-rows:1fr;min-height:0">
+            <sc-for list="{{ p.mini }}" as="m" hint-placeholder-count="42">
+              <a href="{{ m.href }}" style="display:flex;align-items:center;justify-content:center;font:{{ m.font }};color:{{ m.color }};background:{{ m.bg }};border-radius:2px">{{ m.d }}</a>
+            </sc-for>
+          </div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column">
+          <div style="font:400 11px Lora,serif;letter-spacing:0.14em;color:#8d8a87;padding-bottom:5px">HAFTANIN ÜÇ İŞİ</div>
+          <div style="flex:none;box-sizing:border-box;border:1px solid #cfccc9;border-radius:5px;padding:9px 12px;display:flex;flex-direction:column;gap:8px">
+            <sc-for list="{{ p.ucIs }}" as="i" hint-placeholder-count="3">
+              <span style="display:flex;align-items:center;gap:10px">
+                <span onClick="{{ i.kutu.t }}" style="width:17px;height:17px;flex:none;box-sizing:border-box;border:1px solid #a89ac4;border-radius:3px;background:{{ i.kutu.bg }};cursor:pointer"></span>
+                <input type="text" defaultValue="{{ i.yz.d }}" onBlur="{{ i.yz.b }}" style="width:100%;box-sizing:border-box;border:none;background:transparent;font:400 15px Lora,serif;color:#201e1d;outline:none;padding:0 6px;flex:1;border-bottom:1px solid #e6e2df;height:25px" />
+              </span>
+            </sc-for>
+          </div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column">
+          <div style="font:400 11px Lora,serif;letter-spacing:0.14em;color:#8d8a87;padding-bottom:5px">YERİ BELLİ DEĞİL</div>
+          <div style="flex:1;display:flex;flex-direction:column;min-height:0">
+            <sc-for list="{{ p.belirsiz }}" as="r" hint-placeholder-count="5">
+              <input type="text" defaultValue="{{ r.d }}" onBlur="{{ r.b }}" style="width:100%;box-sizing:border-box;border:none;background:transparent;font:400 15px Lora,serif;color:#201e1d;outline:none;padding:0 6px;flex:1;min-height:0;border-bottom:1px solid #ebe7e4;font-size:14px" />
+            </sc-for>
+          </div>
+        </div>
+      </div>
+      <div style="flex:1;display:flex;align-items:stretch;min-height:0;border-top:1px solid #cfccc9">
+        <div style="width:36px;flex:none;display:flex;flex-direction:column">
+          <span style="flex:none;height:44px;border-bottom:1px solid #ebe7e4"></span>
+          <sc-for list="{{ saatler }}" as="h" hint-placeholder-count="18">
+            <span style="flex:1;min-height:0;display:flex;align-items:center;justify-content:center;font:400 11px Lora,serif;color:#a9a6a3;border-bottom:{{ h.cizgi }}">{{ h.et }}</span>
+          </sc-for>
+        </div>
+        <sc-for list="{{ p.gunler }}" as="g" hint-placeholder-count="8">
+          <div style="flex:1;min-width:0;display:flex;flex-direction:column;border-left:1px solid #ebe7e4;background:{{ g.bg }}">
+            <a href="{{ g.href }}" style="box-sizing:border-box;flex:none;height:44px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-bottom:1px solid #ebe7e4">
+              <span style="font:400 11px Lora,serif;color:{{ g.fg }}">{{ g.kisa }}</span>
+              <span style="font:400 17px Lora,serif;color:{{ g.fg }}">{{ g.no }}</span>
+            </a>
+            <sc-for list="{{ g.kutucuk }}" as="c" hint-placeholder-count="18">
+              <span style="flex:1;min-height:0;border-bottom:{{ c.cizgi }}">
+                <input type="text" defaultValue="{{ c.yz.d }}" onBlur="{{ c.yz.b }}" style="width:100%;height:100%;box-sizing:border-box;border:none;background:transparent;font:400 11px Lora,serif;color:#201e1d;outline:none;padding:0 3px" />
+              </span>
+            </sc-for>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <div style="position:absolute;left:0;right:0;bottom:0;height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 30px;background:#faf8f5;border-top:1px solid #e6e2df">
+      <a href="{{ p.geriHref }}" style="font:400 16px Lora,serif;color:#6e6b68">{{ p.geri }}</a>
+      <a href="{{ tocHref }}" style="font:400 12px Lora,serif;letter-spacing:0.14em;color:#a9a6a3">İÇİNDEKİLER</a>
+      <a href="{{ p.ileriHref }}" style="font:400 16px Lora,serif;color:#6e6b68">{{ p.ileri }}</a>
+    </div>
+  </section></sc-for><sc-for list="{{ resetler }}" as="p" hint-placeholder-count="9"><section class="page" id="{{ p.id }}" style="position:relative;background:#fdfcfa;overflow:hidden">
+    <sc-for list="{{ p.fotolar }}" as="f" hint-placeholder-count="0">
+      <span style="position:absolute;left:{{ f.sol }};top:{{ f.ust }};width:{{ f.en }};z-index:{{ f.z }};cursor:move;transform:{{ f.aci }};transform-origin:50% 50%" onMouseDown="{{ f.bas }}" onMouseEnter="{{ f.gir }}" onMouseLeave="{{ f.cik }}">
+        <span style="display:block">{{ f.gorsel }}</span>
+        <span onClick="{{ f.sil }}" style="position:absolute;right:-9px;top:-9px;width:20px;height:20px;border-radius:50%;background:#fdfcfa;border:1px solid #cfccc9;display:flex;align-items:center;justify-content:center;font:400 13px Lora,serif;color:#8d8a87;cursor:pointer;opacity:{{ f.tut }};transition:opacity 0.12s">×</span><span onMouseDown="{{ f.boyut }}" style="position:absolute;right:-8px;bottom:-8px;width:18px;height:18px;border-radius:50%;background:#fdfcfa;border:1px solid #cfccc9;display:flex;align-items:center;justify-content:center;font:400 11px Lora,serif;color:#8d8a87;cursor:nwse-resize;opacity:{{ f.tut }};transition:opacity 0.12s">⤢</span><span onMouseDown="{{ f.don }}" style="position:absolute;left:-8px;bottom:-8px;width:18px;height:18px;border-radius:50%;background:#fdfcfa;border:1px solid #cfccc9;display:flex;align-items:center;justify-content:center;font:400 11px Lora,serif;color:#8d8a87;cursor:grab;opacity:{{ f.tut }};transition:opacity 0.12s">↻</span>
+      </span>
+    </sc-for>
+    <span style="position:absolute;right:14px;top:86px;z-index:6;display:flex;gap:6px"><span onClick="{{ p.stickerEkle }}" style="padding:4px 11px;border:1px solid #e0cdbd;border-radius:12px;background:#fdfcfa;font:400 11px Lora,serif;letter-spacing:0.06em;color:#c4885b;cursor:pointer">＋ STICKER</span><span onClick="{{ p.fotoEkle }}" style="padding:4px 11px;border:1px solid #cfccc9;border-radius:12px;background:#fdfcfa;font:400 11px Lora,serif;letter-spacing:0.06em;color:#8d8a87;cursor:pointer">＋ FOTOĞRAF</span></span>
+
+    <div style="position:absolute;left:0;right:0;top:0;height:74px;display:flex;align-items:stretch;background:#faf8f5;border-bottom:1px solid #e6e2df">
+      <sc-for list="{{ sekHafta }}" as="s" hint-placeholder-count="8">
+        <a href="{{ s.href }}" style="flex:1;position:relative;overflow:hidden;background:{{ s.renk }};border:2px solid #fdfcfa;box-shadow:{{ s.ic }};opacity:{{ s.op }}"><span style="position:absolute;inset:0;background-image:url({{ s.mg }});background-size:cover;background-position:50% 50%;opacity:0.62;mix-blend-mode:multiply"></span><span style="position:absolute;inset:0;background:{{ s.renk }};opacity:0.3"></span></a>
+      </sc-for>
+    </div>
+    <div style="position:absolute;left:0;top:74px;bottom:62px;width:78px;background:#f6f4f1;border-right:1px solid #e6e2df;display:flex;flex-direction:column">
+      <sc-for list="{{ p.yan }}" as="y" hint-placeholder-count="9">
+        <a href="{{ y.href }}" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;border-bottom:1px solid #eae7e3;background:{{ y.bg }}">
+          <span style="font:400 18px Lora,serif;color:{{ y.fg }}">{{ y.no }}</span>
+          <span style="font:400 10px Lora,serif;color:#a9a6a3">hafta</span>
+        </a>
+      </sc-for>
+    </div>
+    <div style="position:absolute;left:78px;right:0;top:74px;bottom:62px;padding:22px 26px;display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid #201e1d;min-height:70px;padding:0 16px 6px;border-radius:8px 8px 0 0;background-image:linear-gradient(90deg,rgba(253,252,250,0.95) 0%,rgba(253,252,250,0.46) 55%,rgba(253,252,250,0.88) 100%),url(bant-5.png);background-size:auto,cover;background-position:50% 50%,50% 50%;background-repeat:no-repeat">
+        <span style="display:flex;align-items:baseline;gap:14px">
+          <span style="font:400 34px Lora,serif;letter-spacing:-0.01em">Haftalık reset</span>
+          <span style="font:400 17px Lora,serif;color:#6e6b68">{{ p.baslik }}</span>
+        </span>
+        <span style="font:400 13px Lora,serif;letter-spacing:0.14em;color:#a89ac4">HAFTA</span>
+      </div>
+      <div style="flex:none;box-sizing:border-box;border:1px solid #a9a6a3;border-radius:5px;overflow:hidden">
+        <sc-for list="{{ p.adimlar }}" as="a" hint-placeholder-count="8">
+          <div style="height:56px;display:flex;align-items:center;gap:14px;padding:0 14px;border-top:{{ a.top }}">
+            <span onClick="{{ a.kutu.t }}" style="width:18px;height:18px;flex:none;box-sizing:border-box;border:1px solid #a89ac4;border-radius:3px;background:{{ a.kutu.bg }};cursor:pointer"></span>
+            <span style="width:104px;flex:none;font:600 15px Lora,serif;color:#201e1d">{{ a.ad }}</span>
+            <span style="flex:1;font:400 14px Lora,serif;color:#6e6b68">{{ a.ne }}</span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="flex:none;display:flex;flex-direction:column">
+        <div style="font:400 11px Lora,serif;letter-spacing:0.14em;color:#8d8a87;padding-bottom:5px">ALIŞKANLIK</div>
+        <div style="box-sizing:border-box;border:1px solid #a9a6a3;border-radius:5px;overflow:hidden">
+          <div style="display:flex;background:#f6f4f2;border-bottom:1px solid #a9a6a3">
+            <span style="box-sizing:border-box;width:150px;flex:none;padding:6px 10px;font:400 10px Lora,serif;letter-spacing:0.06em;color:#8d8a87">NE</span>
+            <sc-for list="{{ p.gunler }}" as="g" hint-placeholder-count="8">
+              <span style="box-sizing:border-box;flex:1;text-align:center;padding:6px 0;font:400 10px Lora,serif;color:#8d8a87">{{ g.kisa }}</span>
+            </sc-for>
+          </div>
+          <sc-for list="{{ p.aliskanlik }}" as="r" hint-placeholder-count="5">
+            <div style="height:40px;display:flex;align-items:center;border-top:{{ r.top }}">
+              <input type="text" defaultValue="{{ r.ad.d }}" onBlur="{{ r.ad.b }}" style="width:100%;box-sizing:border-box;border:none;background:transparent;font:400 15px Lora,serif;color:#201e1d;outline:none;padding:0 6px;width:150px;flex:none;font-size:14px;border-right:1px solid #ebe7e4" />
+              <sc-for list="{{ r.hucre }}" as="c" hint-placeholder-count="8">
+                <span style="flex:1;display:flex;justify-content:center">
+                  <span onClick="{{ c.t }}" style="width:16px;height:16px;flex:none;box-sizing:border-box;border:1px solid #a89ac4;border-radius:3px;background:{{ c.bg }};cursor:pointer"></span>
+                </span>
+              </sc-for>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="flex:none;height:132px;display:flex;flex-direction:column">
+        <div style="flex:none;display:flex;align-items:baseline;justify-content:space-between;padding-bottom:4px">
+          <span style="font:400 11px Lora,serif;letter-spacing:0.14em;color:#8d8a87">SÜRE TAKİBİ — TAHMİN / GERÇEK</span>
+          <span style="font:400 11px Lora,serif;color:#a9a6a3">{{ p.sureOzet }}</span>
+        </div>
+        <div style="flex:1;display:flex;align-items:stretch;gap:8px;min-height:0;border-bottom:1px solid #ded9d4">
+          <sc-for list="{{ p.sure }}" as="g" hint-placeholder-count="8">
+            <span style="flex:1;display:flex;flex-direction:column;min-height:0;gap:3px">
+              <span style="flex:1;display:flex;align-items:flex-end;justify-content:center;gap:4px;min-height:0">
+                <span style="width:14px;height:{{ g.tahYuk }};background:#cdd8e4;border-radius:2px 2px 0 0"></span>
+                <span style="width:14px;height:{{ g.gerYuk }};background:#a89ac4;border-radius:2px 2px 0 0"></span>
+              </span>
+              <span style="flex:none;text-align:center;font:400 10px Lora,serif;color:#a9a6a3">{{ g.kisa }}</span>
+            </span>
+          </sc-for>
+        </div>
+        <div style="flex:none;display:flex;gap:14px;padding-top:4px">
+          <span style="display:flex;align-items:center;gap:5px;font:400 10px Lora,serif;color:#8d8a87"><span style="width:10px;height:10px;background:#cdd8e4"></span>tahmin</span>
+          <span style="display:flex;align-items:center;gap:5px;font:400 10px Lora,serif;color:#8d8a87"><span style="width:10px;height:10px;background:#a89ac4"></span>gerçek</span>
+        </div>
+      </div>
+      <div style="flex:1;display:flex;gap:18px;min-height:0">
+        <div style="flex:1;display:flex;flex-direction:column;min-height:0">
+          <div style="font:400 11px Lora,serif;letter-spacing:0.14em;color:#8d8a87;padding-bottom:5px">YAKALA</div>
+          <sc-for list="{{ p.yakalanan }}" as="y" hint-placeholder-count="0">
+            <div style="flex:none;display:flex;align-items:center;gap:7px;border-bottom:1px solid #ebe7e4;padding:4px 0">
+              <span style="font:400 9px Lora,serif;letter-spacing:0.06em;color:#c99a9b">{{ y.gun }}</span>
+              <span style="flex:1;font:400 13px Lora,serif;color:#4a4744">{{ y.metin }}</span>
+              <span onClick="{{ y.belirsiz }}" style="padding:2px 8px;border:1px solid #ded9d4;border-radius:9px;font:400 9px Lora,serif;letter-spacing:0.04em;color:#8d8a87;cursor:pointer">YERİ BELLİ DEĞİL</span>
+              <span onClick="{{ y.ucIs }}" style="padding:2px 8px;border:1px solid #ded9d4;border-radius:9px;font:400 9px Lora,serif;letter-spacing:0.04em;color:#8d8a87;cursor:pointer">ÜÇ İŞ</span>
+            </div>
+          </sc-for>
+          <textarea defaultValue="{{ p.yakala.d }}" onBlur="{{ p.yakala.b }}" style="width:100%;height:100%;box-sizing:border-box;border:none;background:transparent;font:400 15px/1.5 Lora,serif;color:#201e1d;outline:none;padding:8px 10px;resize:none;flex:1;border:1px solid #e6e2df;border-radius:5px;background:#fbfaf8;min-height:0"></textarea>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;min-height:0">
+          <div style="font:400 11px Lora,serif;letter-spacing:0.14em;color:#a89ac4;padding-bottom:5px">HAFTANIN İYİ ANI</div>
+          <textarea defaultValue="{{ p.iyiAn.d }}" onBlur="{{ p.iyiAn.b }}" style="width:100%;height:100%;box-sizing:border-box;border:none;background:transparent;font:400 15px/1.5 Lora,serif;color:#201e1d;outline:none;padding:8px 10px;resize:none;flex:1;border:1px solid #e6e2df;border-radius:5px;background:#fbfaf8;min-height:0"></textarea>
+        </div>
+      </div>
+    </div>
+    <div style="position:absolute;left:0;right:0;bottom:0;height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 30px;background:#faf8f5;border-top:1px solid #e6e2df">
+      <a href="{{ p.geriHref }}" style="font:400 16px Lora,serif;color:#6e6b68">{{ p.geri }}</a>
+      <a href="{{ tocHref }}" style="font:400 12px Lora,serif;letter-spacing:0.14em;color:#a9a6a3">İÇİNDEKİLER</a>
+      <a href="{{ p.ileriHref }}" style="font:400 16px Lora,serif;color:#6e6b68">{{ p.ileri }}</a>
+    </div>
+  </section></sc-for></doc-page>
+</x-dc>
+<script data-dc-script type="text/plain">
+class Component extends DCLogic {
+
+  state = { d: (function () { try { return JSON.parse(window.localStorage.getItem("ajanda-v3") || "{}"); } catch (e) { return {}; } })(), yuk: true };
+
+  componentDidMount() {
+    (function () {
+      const bas = Date.now();
+      const t = window.setInterval(function () {
+        const dp = document.querySelector("doc-page");
+        const ilk = dp && dp.querySelector(":scope > .page");
+        if (dp && dp._measure) dp._measure();
+        if ((ilk && ilk.offsetHeight > 0) || Date.now() - bas > 30000) window.clearInterval(t);
+      }, 400);
+    })();
+    const git = function () {
+      const h = window.location.hash;
+      if (!h || h.length < 2) return;
+      const el = document.getElementById(decodeURIComponent(h.slice(1)));
+      if (el) window.scrollBy(0, el.getBoundingClientRect().top - 12);
+    };
+    setTimeout(git, 350); setTimeout(git, 1000); setTimeout(git, 2200);
+    window.addEventListener("hashchange", function () { setTimeout(git, 80); });
+  }
+
+  kaydet(d) { try { window.localStorage.setItem("ajanda-v3", JSON.stringify(d)); } catch (e) {} }
+
+  yaz(k, v) {
+    const self = this;
+    this.setState(function (st) {
+      const d = Object.assign({}, st.d);
+      if (v === "" || v === false || v === null || v === undefined) delete d[k]; else d[k] = v;
+      self.kaydet(d);
+      return { d: d };
+    });
+  }
+
+  yazCok(cift) {
+    const self = this;
+    this.setState(function (st) {
+      const d = Object.assign({}, st.d);
+      Object.keys(cift).forEach(function (k) {
+        const v = cift[k];
+        if (v === "" || v === false || v === null || v === undefined) delete d[k]; else d[k] = v;
+      });
+      self.kaydet(d);
+      return { d: d };
+    });
+  }
+
+  al(k) { const d = this.state.d || {}; return d[k] === undefined ? "" : d[k]; }
+
+  yz(k) {
+    const self = this;
+    return { id: "i-" + k, d: this.al(k), b: function (e) { if (e.target.value !== self.al(k)) self.yaz(k, e.target.value); } };
+  }
+
+  cn(k) {
+    const self = this;
+    return { id: "i-" + k, d: this.al(k), b: function (e) { self.yaz(k, e.target.value); } };
+  }
+
+  kt(k, renk) {
+    const self = this;
+    const acik = !!this.al(k);
+    return { bg: acik ? (renk || "#8fae9b") : "transparent", t: function () { self.yaz(k, !acik); } };
+  }
+
+  sayi(v) {
+    if (!v) return 0;
+    const t = String(v).replace(/[^0-9,.-]/g, "").replace(/\./g, "").replace(",", ".");
+    const n = parseFloat(t);
+    return isNaN(n) ? 0 : n;
+  }
+  bicim(n) { return n === 0 ? "" : n.toLocaleString("tr-TR", { maximumFractionDigits: 2 }) + " ₺"; }
+
+  foto(id) {
+    const self = this;
+    const anahtar = "foto-" + id;
+    const dizi = this.al(anahtar) || [];
+    return {
+      fotolar: dizi.map(function (f, i) {
+        return {
+          gorsel: React.createElement("img", { src: f.src, alt: "", style: { display: "block", width: "100%", height: "auto" } }),
+          sol: f.x + "px", ust: f.y + "px", en: f.w + "px",
+          bas: function (e) { self.fotoSurukle(anahtar, i, e); },
+          boyut: function (e) { self.fotoBoyut(anahtar, i, e); },
+          don: function (e) { self.fotoDondur(anahtar, i, e); },
+          aci: "rotate(" + (f.a || 0) + "deg)",
+          tut: self.state.hv === (anahtar + "-" + i) ? "1" : "0",
+          z: self.state.hv === (anahtar + "-" + i) ? 60 : 5 + i,
+          gir: function () { self.setState({ hv: anahtar + "-" + i }); },
+          cik: function () { self.setState({ hv: null }); },
+          sil: function () { const a = (self.al(anahtar) || []).slice(); a.splice(i, 1); self.yaz(anahtar, a.length ? a : false); }
+        };
+      }),
+      fotoEkle: function () { self.fotoAl(anahtar); },
+      stickerEkle: function () { self.stickerAl(anahtar); }
+    };
+  }
+
+stickerAl(anahtar) {
+    const self = this;
+    if (document.getElementById("st-galeri")) return;
+    const SET = [["01",15],["02",11],["03",12],["04",13],["05",13],["06",12],["07",15],["08",3],["09",12],["10",8],["11",5],["13",17],["14",14],["15",6],["16",10],["17",22],["18",16],["19",17],["20",2],["21",1]];
+    const kap = document.createElement("div");
+    kap.id = "st-galeri";
+    kap.setAttribute("style", "position:fixed;inset:0;z-index:9999;background:rgba(32,30,29,0.55);display:flex;align-items:center;justify-content:center;font-family:Lora,serif");
+    const kutu = document.createElement("div");
+    kutu.setAttribute("style", "width:min(880px,92vw);height:min(620px,88vh);background:#fdfcfa;border-radius:12px;box-shadow:0 12px 44px rgba(0,0,0,0.35);display:flex;flex-direction:column;overflow:hidden");
+    const bas = document.createElement("div");
+    bas.setAttribute("style", "flex:none;display:flex;align-items:center;justify-content:space-between;padding:16px 22px;border-bottom:1px solid #e6e2df");
+    bas.innerHTML = '<span style="font:400 20px Lora,serif;color:#201e1d">Sticker seç</span>';
+    const yeni = document.createElement("span");
+    yeni.textContent = "＋ KENDİ STICKER'IM";
+    yeni.setAttribute("style", "margin-left:auto;margin-right:16px;padding:5px 14px;border:1px solid #e0cdbd;border-radius:14px;font:400 12px Lora,serif;letter-spacing:0.06em;color:#c4885b;cursor:pointer");
+    yeni.onclick = function () { self.stickerYukle(function () { kap.remove(); self.stickerAl(anahtar); }); };
+    bas.appendChild(yeni);
+    const kapat = document.createElement("span");
+    kapat.textContent = "×";
+    kapat.setAttribute("style", "font:400 24px Lora,serif;color:#8d8a87;cursor:pointer;padding:0 6px");
+    kapat.onclick = function () { kap.remove(); };
+    bas.appendChild(kapat);
+    const izgara = document.createElement("div");
+    izgara.setAttribute("style", "flex:1;overflow:auto;padding:16px 18px;display:flex;flex-wrap:wrap;gap:10px;align-content:flex-start;background:#f4f2ee");
+    const kendi = self.al("kendi-st") || [];
+    kendi.forEach(function (src, ki) {
+      var h = document.createElement("span");
+      h.setAttribute("style", "position:relative;width:92px;height:92px;display:flex;align-items:center;justify-content:center;background:#fdfcfa;border:1px solid #e0cdbd;border-radius:8px;cursor:pointer;padding:6px");
+      h.innerHTML = '<img src="' + src + '" alt="" style="max-width:100%;max-height:100%;object-fit:contain" />';
+      var sil = document.createElement("span");
+      sil.textContent = "×";
+      sil.setAttribute("style", "position:absolute;right:-6px;top:-6px;width:19px;height:19px;border-radius:50%;background:#fdfcfa;border:1px solid #cfccc9;display:flex;align-items:center;justify-content:center;font:400 12px Lora,serif;color:#8d8a87");
+      sil.onclick = function (ev) { ev.stopPropagation(); const a = (self.al("kendi-st") || []).slice(); a.splice(ki, 1); self.yaz("kendi-st", a.length ? a : false); h.remove(); };
+      h.appendChild(sil);
+      h.onclick = function () { self.stickerKoy(anahtar, src); kap.remove(); };
+      izgara.appendChild(h);
+    });
+    SET.forEach(function (g) {
+      for (var i = 1; i <= g[1]; i++) {
+        var src = "st-" + g[0] + "-" + String(i).padStart(2, "0") + ".png";
+        var h = document.createElement("span");
+        h.setAttribute("style", "width:92px;height:92px;display:flex;align-items:center;justify-content:center;background:#fdfcfa;border:1px solid #e6e2df;border-radius:8px;cursor:pointer;padding:6px");
+        h.innerHTML = '<img src="' + src + '" alt="" style="max-width:100%;max-height:100%;object-fit:contain" />';
+        h.onclick = (function (s) { return function () { self.stickerKoy(anahtar, s); kap.remove(); }; })(src);
+        izgara.appendChild(h);
+      }
+    });
+    kutu.appendChild(bas); kutu.appendChild(izgara); kap.appendChild(kutu);
+    kap.onclick = function (e) { if (e.target === kap) kap.remove(); };
+    document.body.appendChild(kap);
+  }
+
+  stickerYukle(bitince) {
+    const self = this;
+    const inp = document.createElement("input");
+    inp.type = "file"; inp.accept = "image/*";
+    inp.onchange = function () {
+      const dosya = inp.files && inp.files[0];
+      if (!dosya) return;
+      const fr = new FileReader();
+      fr.onload = function () {
+        const im = new Image();
+        im.onload = function () {
+          const en = Math.min(340, im.width), boy = Math.round(im.height * en / im.width);
+          const c = document.createElement("canvas");
+          c.width = en; c.height = boy;
+          const x = c.getContext("2d");
+          x.drawImage(im, 0, 0, en, boy);
+          if (window.confirm("Düz arka planı temizleyeyim mi?")) {
+            try {
+              const d = x.getImageData(0, 0, en, boy);
+              const p = d.data;
+              const bg = [p[0], p[1], p[2]];
+              const tol = 34;
+              const gor = new Uint8Array(en * boy);
+              const q = [];
+              const yakin = function (k) { return Math.abs(p[k]-bg[0]) < tol && Math.abs(p[k+1]-bg[1]) < tol && Math.abs(p[k+2]-bg[2]) < tol; };
+              for (var i = 0; i < en; i++) { [0, boy-1].forEach(function (j) { const idx = j*en+i; if (!gor[idx] && yakin(idx*4)) { gor[idx]=1; q.push(idx); } }); }
+              for (var j2 = 0; j2 < boy; j2++) { [0, en-1].forEach(function (i2) { const idx = j2*en+i2; if (!gor[idx] && yakin(idx*4)) { gor[idx]=1; q.push(idx); } }); }
+              while (q.length) {
+                const t = q.pop(), a = t % en, b = (t / en) | 0;
+                [[a-1,b],[a+1,b],[a,b-1],[a,b+1]].forEach(function (uv) {
+                  const u = uv[0], v = uv[1];
+                  if (u < 0 || v < 0 || u >= en || v >= boy) return;
+                  const idx = v*en+u;
+                  if (gor[idx] || !yakin(idx*4)) return;
+                  gor[idx] = 1; q.push(idx);
+                });
+              }
+              for (var k2 = 0; k2 < en*boy; k2++) if (gor[k2]) p[k2*4+3] = 0;
+              x.putImageData(d, 0, 0);
+            } catch (err) {}
+          }
+          const veri = c.toDataURL("image/png");
+          const a = (self.al("kendi-st") || []).slice();
+          if (a.length >= 40) { window.alert("Kırk kendi sticker'ın var, birini silip tekrar dene."); return; }
+          a.push(veri);
+          self.yaz("kendi-st", a);
+          if (bitince) bitince();
+        };
+        im.src = fr.result;
+      };
+      fr.readAsDataURL(dosya);
+    };
+    inp.click();
+  }
+
+  stickerKoy(anahtar, src) {
+    const im = new Image();
+    const self = this;
+    im.onload = function () {
+      const en = Math.min(240, im.width);
+      const a = (self.al(anahtar) || []).slice();
+      a.push({ src: src, x: 120 + a.length * 18, y: 260 + a.length * 18, w: en });
+      self.yaz(anahtar, a);
+    };
+    im.onerror = function () {
+      const a = (self.al(anahtar) || []).slice();
+      a.push({ src: src, x: 140, y: 280, w: 200 });
+      self.yaz(anahtar, a);
+    };
+    im.src = src;
+  }
+
+  fotoAl(anahtar) {
+    const self = this;
+    const inp = document.createElement("input");
+    inp.type = "file"; inp.accept = "image/*";
+    inp.onchange = function () {
+      const dosya = inp.files && inp.files[0];
+      if (!dosya) return;
+      const fr = new FileReader();
+      fr.onload = function () {
+        const img = new Image();
+        img.onload = function () {
+          const o = Math.min(1, 720 / img.width);
+          const c = document.createElement("canvas");
+          c.width = Math.round(img.width * o); c.height = Math.round(img.height * o);
+          c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+          const a = (self.al(anahtar) || []).slice();
+          a.push({ src: c.toDataURL("image/jpeg", 0.8), x: 120, y: 180, w: Math.min(300, c.width) });
+          self.yaz(anahtar, a);
+        };
+        img.src = fr.result;
+      };
+      fr.readAsDataURL(dosya);
+    };
+    inp.click();
+  }
+
+  fotoDondur(anahtar, i, e) {
+    e.preventDefault(); e.stopPropagation();
+    const self = this;
+    const kutu = e.currentTarget.parentElement.getBoundingClientRect();
+    const mx = kutu.left + kutu.width / 2, my = kutu.top + kutu.height / 2;
+    const hareket = function (ev) {
+      const a = (self.al(anahtar) || []).slice();
+      if (!a[i]) return;
+      let d = Math.atan2(ev.clientY - my, ev.clientX - mx) * 180 / Math.PI + 135;
+      d = Math.round(d / 3) * 3;
+      a[i] = Object.assign({}, a[i], { a: d });
+      self.setState(function (st) { const dd = Object.assign({}, st.d); dd[anahtar] = a; return { d: dd }; });
+    };
+    const birak = function () {
+      window.removeEventListener("mousemove", hareket);
+      window.removeEventListener("mouseup", birak);
+      self.kaydet(self.state.d);
+    };
+    window.addEventListener("mousemove", hareket);
+    window.addEventListener("mouseup", birak);
+  }
+
+  fotoBoyut(anahtar, i, e) {
+    e.preventDefault(); e.stopPropagation();
+    const self = this;
+    const b = (this.al(anahtar) || [])[i];
+    if (!b) return;
+    const x0 = e.clientX, bw = b.w || 200;
+    const hareket = function (ev) {
+      const a = (self.al(anahtar) || []).slice();
+      if (!a[i]) return;
+      const en = Math.max(40, Math.min(900, Math.round(bw + (ev.clientX - x0))));
+      a[i] = Object.assign({}, a[i], { w: en });
+      self.setState(function (st) { const d = Object.assign({}, st.d); d[anahtar] = a; return { d: d }; });
+    };
+    const birak = function () {
+      window.removeEventListener("mousemove", hareket);
+      window.removeEventListener("mouseup", birak);
+      self.kaydet(self.state.d);
+    };
+    window.addEventListener("mousemove", hareket);
+    window.addEventListener("mouseup", birak);
+  }
+
+  fotoSurukle(anahtar, i, e) {
+    const self = this;
+    e.preventDefault();
+    const b = (self.al(anahtar) || [])[i];
+    if (!b) return;
+    const x0 = e.clientX, y0 = e.clientY, bx = b.x, by = b.y;
+    const hareket = function (ev) {
+      const a = (self.al(anahtar) || []).slice();
+      if (!a[i]) return;
+      a[i] = Object.assign({}, a[i], { x: Math.round(bx + ev.clientX - x0), y: Math.round(by + ev.clientY - y0) });
+      self.setState(function (st) { const d = Object.assign({}, st.d); d[anahtar] = a; return { d: d }; });
+    };
+    const birak = function () {
+      window.removeEventListener("mousemove", hareket);
+      window.removeEventListener("mouseup", birak);
+      self.kaydet(self.state.d);
+    };
+    window.addEventListener("mousemove", hareket);
+    window.addEventListener("mouseup", birak);
+  }
+
+  fotoKur(liste) {
+    const self = this;
+    liste.forEach(function (l) {
+      if (!l) return;
+      l.forEach(function (p) { if (p && p.id) { const f = self.foto(p.id); p.fotolar = f.fotolar; p.fotoEkle = f.fotoEkle; p.stickerEkle = f.stickerEkle; } });
+    });
+  }
+
+  tuvalKur(anahtar) {
+    const self = this;
+    this._tuval = this._tuval || {};
+    return function (el) {
+      if (!el) return;
+      self._tuval[anahtar] = el;
+      if (el.__kurulu) return;
+      el.__kurulu = true;
+      const ctx = el.getContext("2d");
+      ctx.lineWidth = 3; ctx.lineCap = "round"; ctx.lineJoin = "round"; ctx.strokeStyle = "#3a3128";
+      const kayit = self.al(anahtar);
+      if (kayit) { const im = new Image(); im.onload = function () { ctx.drawImage(im, 0, 0); }; im.src = kayit; }
+      let ciziyor = false;
+      const nokta = function (ev) {
+        const r = el.getBoundingClientRect();
+        return { x: (ev.clientX - r.left) * el.width / r.width, y: (ev.clientY - r.top) * el.height / r.height };
+      };
+      el.addEventListener("mousedown", function (ev) { ciziyor = true; const p = nokta(ev); ctx.beginPath(); ctx.moveTo(p.x, p.y); ev.preventDefault(); });
+      el.addEventListener("mousemove", function (ev) { if (!ciziyor) return; const p = nokta(ev); ctx.lineTo(p.x, p.y); ctx.stroke(); });
+      const bitir = function () { if (!ciziyor) return; ciziyor = false; try { self.yaz(anahtar, el.toDataURL("image/png")); } catch (e) {} };
+      el.addEventListener("mouseup", bitir);
+      el.addEventListener("mouseleave", bitir);
+    };
+  }
+
+  tuvalTemizle(anahtar) {
+    const el = (this._tuval || {})[anahtar];
+    if (el) el.getContext("2d").clearRect(0, 0, el.width, el.height);
+    this.yaz(anahtar, false);
+  }
+
+  ertele(t, onek, r) {
+    const self = this;
+    const saySt = "ert-" + onek + t + "-" + r;
+    const say = parseInt(this.al(saySt) || 0, 10);
+    const metinSt = onek + t + "-" + r + "-m";
+    const cizik = !!this.al("cz-" + metinSt);
+    return {
+      cizgi: cizik ? "line-through" : "none",
+      renk: cizik ? "#c4c1be" : "#201e1d",
+      nokta: [0, 1, 2].map(function (j) { return { bg: j < say ? "#c99a9b" : "transparent" }; }),
+      t: function () {
+        const metin = self.al(metinSt);
+        const si = new Date(new Date(t + "T00:00:00Z").getTime() + 86400000).toISOString().slice(0, 10);
+        const hedef = onek + si + "-" + r + "-m";
+        if (!metin) {
+          if (say > 0 && window.confirm("Bu satırda " + say + " erteleme işareti var. İşaretler silinsin mi?")) self.yaz(saySt, false);
+          else if (say === 0) window.alert("Önce işi yaz, sonra ertele.");
+          return;
+        }
+        if (cizik) {
+          if (self.al(hedef) === metin && window.confirm("Yarına taşınan kopya geri alınsın mı? Satır burada tekrar açılır.")) {
+            const geri = {};
+            geri[hedef] = "";
+            geri["ert-" + onek + si + "-" + r] = "";
+            geri["cz-" + hedef] = false;
+            geri["cz-" + metinSt] = false;
+            self.yazCok(geri);
+            const eh = document.getElementById("i-" + hedef); if (eh) eh.value = "";
+            return;
+          }
+          if (window.confirm("Çizgi kaldırılsın mı?")) self.yaz("cz-" + metinSt, false);
+          return;
+        }
+        if (say >= 3) {
+          if (window.confirm("Bu işi üç kez erteledin. Dördüncü kez taşımak yerine kapatalım mı? Satır silinmez, üstü çizilir.")) {
+            self.yaz("cz-" + metinSt, true);
+          }
+          return;
+        }
+        const cift = {};
+        cift[hedef] = metin;
+        cift["cz-" + metinSt] = true;
+        cift["ert-" + onek + si + "-" + r] = say + 1;
+        self.yazCok(cift);
+        const e2 = document.getElementById("i-" + hedef); if (e2) e2.value = metin;
+        if (say + 1 === 3) window.alert("Üçüncü erteleme. Yarın ya yap ya üstünü çiz.");
+      }
+    };
+  }
+
+  gunSec(t) {
+    const d = Object.assign({}, this.state.d);
+    d["aktif-gun"] = t;
+    this.kaydet(d);
+    this.setState({ d: d });
+  }
+
+  aktifGun() {
+    const v = this.al("aktif-gun");
+    if (v) return v;
+    const n = new Date();
+    return new Date(Date.UTC(n.getFullYear(), n.getMonth(), n.getDate())).toISOString().slice(0, 10);
+  }
+
+  renderVals() {
+    const DILIM = 6;
+    const BU = "Ajanda-dijital-hafta-" + DILIM + ".dc.html";
+
+    const AY = ["Ocak","Şubat","Mart","Nisan","Mayıs","Haziran","Temmuz","Ağustos","Eylül","Ekim","Kasım","Aralık"];
+    const AYK = ["Oca","Şub","Mar","Nis","May","Haz","Tem","Ağu","Eyl","Eki","Kas","Ara"];
+    const GUN = ["Pazartesi","Salı","Çarşamba","Perşembe","Cuma","Cumartesi","Pazar"];
+    const GUNK = ["Pt","Sa","Ça","Pe","Cu","Ct","Pa"];
+    const iso = (d) => d.toISOString().slice(0, 10);
+    const dow = (d) => (d.getUTCDay() + 6) % 7;
+    const mk = (y, m, d) => new Date(Date.UTC(y, m, d));
+    const gun = (d, n) => new Date(d.getTime() + n * 86400000);
+    const ikiHane = (n) => String(n).padStart(2, "0");
+
+    const ANA = "Ajanda-dijital.dc.html";
+    const DONEM = "Ajanda-dijital-donem.dc.html";
+    const gunDosya = (d) => "Ajanda-dijital-gun-" + d.getUTCFullYear() + "-" + ikiHane(d.getUTCMonth() + 1) + ".dc.html";
+    const haftaDosya = (i) => "Ajanda-dijital-hafta-" + (Math.floor(i / 9) + 1) + ".dc.html";
+    const H = (dosya, hash) => (dosya === BU ? "" : dosya) + "#" + hash;
+
+    const bas = mk(2026, 7, 1);
+    const son = mk(2027, 6, 31);
+    const icinde = (d) => d >= bas && d <= son;
+    const ayBas = Array.from({ length: 12 }, (_, i) => mk(2026, 7 + i, 1));
+    const ayId = (d) => "a-" + d.getUTCFullYear() + "-" + ikiHane(d.getUTCMonth() + 1);
+    const ilkPzt = gun(bas, -dow(bas));
+    const haftaBas = [];
+    for (let d = ilkPzt; d <= son; d = gun(d, 7)) haftaBas.push(d);
+    const haftaSira = {};
+    haftaBas.forEach((d, i) => { haftaSira[iso(d)] = i; });
+    const isoHafta = (d) => {
+      const t = new Date(d.getTime());
+      t.setUTCDate(t.getUTCDate() + 3 - dow(t));
+      const y0 = new Date(Date.UTC(t.getUTCFullYear(), 0, 4));
+      return 1 + Math.round((t - y0) / 604800000);
+    };
+    const gunHref = (d) => icinde(d) ? H(gunDosya(d), "g-" + iso(d)) : "";
+    const haftaHref = (hb) => {
+      const i = haftaSira[iso(hb)];
+      return i === undefined ? "" : H(haftaDosya(i), "h-" + iso(hb));
+    };
+    const ayHref = (d) => H(ANA, "a-" + d.getUTCFullYear() + "-" + ikiHane(d.getUTCMonth() + 1));
+    const SAAT = [];
+    for (let h = 6; h <= 23; h++) SAAT.push(ikiHane(h));
+
+    const simdi = new Date();
+    const bugunT = (function () {
+      const t = mk(simdi.getFullYear(), simdi.getMonth(), simdi.getDate());
+      return t < bas ? bas : (t > son ? son : t);
+    })();
+    const bugunAyIdx = (bugunT.getUTCFullYear() - 2026) * 12 + bugunT.getUTCMonth() - 7;
+    const SERIT = [
+      { renk: "#efe7db", href: H(ANA, "bugun") },
+      { renk: "#8fb4d4", href: H(ANA, "yil-takvim-3") },
+      { renk: "#d9c079", href: H(DONEM, (bugunT.getUTCMonth() >= 1 && bugunT.getUTCMonth() <= 6) ? "donem-2" : "donem-1") },
+      { renk: "#c99a9b", href: ayHref(bugunT) },
+      { renk: "#a89ac4", href: haftaHref(gun(bugunT, -dow(bugunT))) },
+      { renk: "#8fae9b", href: gunHref(bugunT) },
+      { renk: "#9ab7b0", href: H(ANA, "alis-" + (bugunAyIdx + 1)) },
+      { renk: "#d9a273", href: H(ANA, "bosalt") }
+    ];
+    const motifler = [1, 2, 3, 4, 5, 6, 7, 8].map(n => ({ mg: "sekme-motif-" + n + ".png" }));
+    const serit = (aktif) => SERIT.map((b, i) => ({
+      ...motifler[i % motifler.length],
+      renk: b.renk, href: b.href,
+      op: i === aktif ? 1 : 0.5,
+      ic: i === aktif ? "inset 0 -4px 0 rgba(32,30,29,0.4)" : "none"
+    }));
+
+    const yz = (k) => this.yz(k);
+    const kt = (k, r) => this.kt(k, r);
+
+    const ilkIdx = (DILIM - 1) * 9;
+    const dilim = haftaBas.slice(ilkIdx, ilkIdx + 9);
+    const saatler = SAAT.map(h => ({ et: h, cizgi: (h === "11" || h === "17") ? "1px solid #bdbab7" : "1px solid #f0edea" }));
+
+    const yanKur = (aktif) => {
+      const out = [];
+      for (let j = -4; j <= 4; j++) {
+        const q = aktif + j;
+        if (q < 0 || q >= haftaBas.length) continue;
+        out.push({
+          no: String(isoHafta(haftaBas[q])), href: haftaHref(haftaBas[q]),
+          bg: q === aktif ? "#efece7" : "transparent",
+          fg: q === aktif ? "#201e1d" : "#8d8a87"
+        });
+      }
+      return out;
+    };
+
+    const kur = (h, k) => {
+      const i = ilkIdx + k;
+      const bit = gun(h, 6);
+      const ayniAy = h.getUTCMonth() === bit.getUTCMonth();
+      const ayniYil = h.getUTCFullYear() === bit.getUTCFullYear();
+      const aralik = ayniAy
+        ? h.getUTCDate() + " – " + bit.getUTCDate() + " " + AY[bit.getUTCMonth()] + " " + bit.getUTCFullYear()
+        : h.getUTCDate() + " " + AY[h.getUTCMonth()] + (ayniYil ? "" : " " + h.getUTCFullYear()) + " – " + bit.getUTCDate() + " " + AY[bit.getUTCMonth()] + " " + bit.getUTCFullYear();
+      const mAy = mk(bit.getUTCFullYear(), bit.getUTCMonth(), 1);
+      const mIlk = dow(mAy);
+      const mN = new Date(Date.UTC(mAy.getUTCFullYear(), mAy.getUTCMonth() + 1, 0)).getUTCDate();
+      const mini = [];
+      for (let j = 0; j < 7; j++) mini.push({ d: GUNK[j], font: "400 10px Lora,serif", color: "#c4c1be", bg: "transparent", href: "" });
+      for (let j = 0; j < Math.ceil((mIlk + mN) / 7) * 7; j++) {
+        const gn = j - mIlk + 1;
+        if (gn < 1 || gn > mN) { mini.push({ d: "", font: "400 12px Lora,serif", color: "#fdfcfa", bg: "transparent", href: "" }); continue; }
+        const d = mk(mAy.getUTCFullYear(), mAy.getUTCMonth(), gn);
+        const buHafta = d >= h && d <= bit;
+        mini.push({
+          d: String(gn),
+          font: buHafta ? "600 12px Lora,serif" : "400 12px Lora,serif",
+          color: buHafta ? "#201e1d" : (dow(d) > 4 ? "#b8b4b0" : "#6e6b68"),
+          bg: buHafta ? "#efe9f2" : "transparent",
+          href: gunHref(d)
+        });
+      }
+      const gunler = GUN.map((g, j) => {
+        const d = gun(h, j);
+        const ic = icinde(d);
+        return {
+          kisa: GUNK[j], no: String(d.getUTCDate()), href: gunHref(d),
+          fg: !ic ? "#d4d0cc" : (j > 4 ? "#a9a6a3" : "#201e1d"),
+          bg: j > 4 ? "#fbfaf8" : "transparent",
+          kutucuk: SAAT.map(s => ({
+            cizgi: (s === "11" || s === "17") ? "1px solid #bdbab7" : "1px solid #f0edea",
+            yz: yz("s-" + iso(d) + "-" + s)
+          }))
+        };
+      });
+      return {
+        i, h, bit, aralik, mini, gunler,
+        baslik: isoHafta(h) + ". hafta",
+        ayAd: AY[mAy.getUTCMonth()] + " " + mAy.getUTCFullYear(),
+        ayHref: ayHref(mAy),
+        yan: yanKur(i)
+      };
+    };
+
+    const haftalar = dilim.map((h, k) => {
+      const t = kur(h, k);
+      return {
+        id: "h-" + iso(h), baslik: t.baslik, aralik: t.aralik, mini: t.mini, gunler: t.gunler,
+        ayAd: t.ayAd, ayHref: t.ayHref, yan: t.yan,
+        ucIs: [0, 1, 2].map(r => ({ kutu: kt("hu-" + iso(h) + "-" + r, "#a89ac4"), yz: yz("hui-" + iso(h) + "-" + r) })),
+        belirsiz: Array.from({ length: 5 }, (_, r) => yz("hb-" + iso(h) + "-" + r)),
+        geri: t.i === 0 ? "‹ Temmuz ardından" : "‹ " + isoHafta(haftaBas[t.i - 1]) + ". hafta reset",
+        geriHref: t.i === 0 ? ANA + "#ardindan-11" : (haftaDosya(t.i - 1) === BU ? "" : haftaDosya(t.i - 1)) + "#reset-" + iso(haftaBas[t.i - 1]),
+        ileri: "Haftalık reset ›", ileriHref: "#reset-" + iso(h)
+      };
+    });
+
+    const self = this;
+    const resetler = dilim.map((h, k) => {
+      const t = kur(h, k);
+      return {
+        id: "reset-" + iso(h), baslik: t.baslik + " · " + t.aralik, yan: t.yan, gunler: t.gunler,
+        adimlar: [
+          { ad: "Her şey", ne: "Kafada ne varsa her şey sayfasına dök" },
+          { ad: "Topla", ne: "Not kâğıtları, telefon notları, e-posta yıldızları" },
+          { ad: "Geçen hafta", ne: "Yapılmayanlar: taşı, sil ya da başkasına ver" },
+          { ad: "Bekleyenler", ne: "Takip sayfasını gez, hatırlatılacakları işaretle" },
+          { ad: "Takvim", ne: "Önümüzdeki iki haftayı oku, çakışmaları çöz" },
+          { ad: "Üç iş", ne: "Haftanın üç işini yaz, dördüncüyü yazma" },
+          { ad: "Yerleştir", ne: "Üç işi saat şeridine koy, yer ayır" }
+        ].map((a, r) => ({ ...a, top: r === 0 ? "none" : "1px solid #ebe7e4", kutu: kt("hr-" + iso(h) + "-" + r, "#a89ac4") })),
+        aliskanlik: Array.from({ length: 5 }, (_, r) => ({
+          top: r === 0 ? "none" : "1px solid #ebe7e4",
+          ad: yz("hn-" + r),
+          hucre: GUN.map((g, j) => kt("ha-" + iso(gun(h, j)) + "-" + r, "#a89ac4"))
+        })),
+        yakala: yz("hy-" + iso(h)), iyiAn: yz("hi-" + iso(h)),
+        yakalanan: (function () {
+          const out = [];
+          for (let j = 0; j < 7; j++) {
+            const d = gun(h, j);
+            const metin = self.al("am-" + iso(d));
+            if (!metin) continue;
+            const aktar = function (onek, adet) {
+              return function () {
+                for (let r = 0; r < adet; r++) {
+                  const kk = onek + iso(h) + "-" + r;
+                  if (!self.al(kk)) {
+                    self.yaz(kk, metin);
+                    const el = document.getElementById("i-" + kk);
+                    if (el) el.value = metin;
+                    return;
+                  }
+                }
+                window.alert("Bu haftada boş satır kalmadı.");
+              };
+            };
+            out.push({ gun: GUNK[j], metin: metin, belirsiz: aktar("hb-", 5), ucIs: aktar("hui-", 3) });
+          }
+          return out;
+        })(),
+        sure: GUN.map(function (g, j) {
+          const d = gun(h, j);
+          let tah = 0, ger = 0;
+          for (let r = 0; r < 3; r++) {
+            tah += self.sayi(self.al("got-" + iso(d) + "-" + r));
+            ger += self.sayi(self.al("gog-" + iso(d) + "-" + r));
+          }
+          return { kisa: GUNK[j], tah: tah, ger: ger };
+        }),
+        geri: "‹ " + t.baslik, geriHref: "#h-" + iso(h),
+        ileri: t.i === haftaBas.length - 1 ? "Beyin fırtınası ›" : isoHafta(haftaBas[t.i + 1]) + ". hafta ›",
+        ileriHref: t.i === haftaBas.length - 1 ? ANA + "#beyin-1" : (haftaDosya(t.i + 1) === BU ? "" : haftaDosya(t.i + 1)) + "#h-" + iso(haftaBas[t.i + 1])
+      };
+    });
+
+    resetler.forEach(function (p) {
+      let en = 1;
+      p.sure.forEach(function (g) { en = Math.max(en, g.tah, g.ger); });
+      let tt = 0, gt = 0;
+      p.sure.forEach(function (g) {
+        tt += g.tah; gt += g.ger;
+        g.tahYuk = Math.round((g.tah / en) * 100) + "%";
+        g.gerYuk = Math.round((g.ger / en) * 100) + "%";
+      });
+      p.sureOzet = tt === 0 && gt === 0 ? "günlük sayfalardaki tahmin/gerçek süreler buraya düşer" : "toplam tahmin " + tt + " · gerçek " + gt;
+    });
+    this.fotoKur([haftalar, resetler]);
+    return { sekHafta: serit(4), saatler, haftalar, resetler, tocHref: ANA + "#toc", gunKisa: GUNK };
+  }
+}
+</script>
+</body>
+</html>

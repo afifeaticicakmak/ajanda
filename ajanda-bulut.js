@@ -12,7 +12,7 @@
   var VERI = "ajanda-v3";
   var TS = "ajanda-v3-ts";
 
-  var sb = null, kul = null, durum = "yukleniyor", zamanlayici = null, sonGonderilen = null;
+  var sb = null, kul = null, durum = "yukleniyor", zamanlayici = null, sonGonderilen = null, sonHata = null;
 
   function ts() { return Number(window.localStorage.getItem(TS) || 0); }
   function tsYaz(v) { window.localStorage.setItem(TS, String(v)); }
@@ -58,7 +58,9 @@
       '<div style="font:400 13px/1.5 Lora,serif;color:#4a4744;padding-bottom:14px">E-postanı yaz, sana altı haneli bir kod göndereyim. Şifre gerekmiyor.</div>' +
       '<input id="ab-mail" type="email" placeholder="e-posta" style="' + GIRDI + '" />' +
       '<div id="ab-btn" style="' + DUGME + '">Kod gönder</div>' +
+      '<div id="ab-aktar" style="' + DUGME + ';background:#fbfaf8;color:#8d8a87">Girişli cihazdan aktar</div>' +
       '<div id="ab-not" style="font:400 12px/1.45 Lora,serif;color:#8d8a87;padding-top:10px"></div>';
+    panel.querySelector("#ab-aktar").onclick = panelAktar;
     panel.querySelector("#ab-btn").onclick = function () {
       var mail = (panel.querySelector("#ab-mail").value || "").trim();
       if (!mail) return;
@@ -67,6 +69,40 @@
       sb.auth.signInWithOtp({ email: mail, options: { shouldCreateUser: true, emailRedirectTo: location.href.split("#")[0].split("?")[0] } }).then(function (r) {
         if (r.error) { not.textContent = "olmadı: " + r.error.message; return; }
         panelKod(mail);
+      });
+    };
+  }
+
+  function gosterMetin(m) {
+    var not = panel.querySelector("#ab-not");
+    not.innerHTML = '<div style="padding-bottom:6px">kopyalanamadı — metni elle seçip kopyala:</div>' +
+      '<textarea readonly style="' + GIRDI + ';height:70px;resize:none;font-size:10px"></textarea>';
+    var ta = not.querySelector("textarea");
+    ta.value = m;
+    ta.focus(); ta.select();
+  }
+
+  function panelAktar() {
+    panel.innerHTML = baslik("CİHAZDAN AKTAR") +
+      '<div style="font:400 13px/1.5 Lora,serif;color:#4a4744;padding-bottom:14px">Girişli cihazda ajandayı aç, sağ alttaki düğmeye dokun, <b>Oturumu kopyala</b>\'ya bas. Kopyalanan metni buraya yapıştır. Mail gerekmiyor.</div>' +
+      '<textarea id="ab-tok" placeholder="kopyalanan metin" style="' + GIRDI + ';height:74px;resize:none;font-size:11px"></textarea>' +
+      '<div id="ab-btn" style="' + DUGME + '">Gir</div>' +
+      '<div id="ab-geri" style="' + DUGME + ';background:#fbfaf8;color:#8d8a87">Mail ile gir</div>' +
+      '<div id="ab-not" style="font:400 12px/1.45 Lora,serif;color:#8d8a87;padding-top:10px"></div>';
+    panel.querySelector("#ab-geri").onclick = panelGiris;
+    panel.querySelector("#ab-btn").onclick = function () {
+      var m = (panel.querySelector("#ab-tok").value || "").trim();
+      var not = panel.querySelector("#ab-not");
+      if (!m) { not.textContent = "metni yapıştır"; return; }
+      not.textContent = "bakılıyor…";
+      var p;
+      try { p = JSON.parse(atob(m.replace(/\s+/g, ""))); } catch (e) { not.textContent = "metin okunamadı — tamamını kopyaladığından emin ol"; return; }
+      if (!p || !p.a || !p.r) { not.textContent = "metin eksik görünüyor"; return; }
+      sb.auth.setSession({ access_token: p.a, refresh_token: p.r }).then(function (r) {
+        if (r.error) { not.textContent = "olmadı: " + r.error.message; return; }
+        kul = (r.data.session && r.data.session.user) || r.data.user;
+        panelKapat();
+        ilkEsitle();
       });
     };
   }
@@ -113,8 +149,10 @@
     panel.innerHTML = baslik("EŞİTLEME") +
       '<div style="font:400 14px Lora,serif;color:#201e1d;padding-bottom:4px">' + (kul.email || "") + '</div>' +
       '<div style="font:400 12px Lora,serif;color:#8d8a87">' + (t ? "son kayıt " + new Date(t).toLocaleString("tr-TR") : "henüz kayıt yok") + '</div>' +
+      (sonHata ? '<div style="font:400 11px/1.4 Lora,serif;color:#b4564f;padding-top:8px">' + sonHata + '</div>' : '') +
       '<div id="ab-gonder" style="' + DUGME + '">Buluta gönder</div>' +
       '<div id="ab-cek" style="' + DUGME + '">Buluttan getir</div>' +
+      '<div id="ab-kopya" style="' + DUGME + '">Oturumu kopyala</div>' +
       '<div id="ab-cik" style="' + DUGME + ';background:#fbfaf8;color:#8d8a87">Çıkış yap</div>' +
       '<div id="ab-not" style="font:400 12px/1.45 Lora,serif;color:#8d8a87;padding-top:10px"></div>';
     panel.querySelector("#ab-gonder").onclick = function () {
@@ -127,6 +165,18 @@
       panel.querySelector("#ab-not").textContent = "getiriliyor…";
       cek(true);
     };
+    panel.querySelector("#ab-kopya").onclick = function () {
+      var not = panel.querySelector("#ab-not");
+      sb.auth.getSession().then(function (r) {
+        var o = r.data && r.data.session;
+        if (!o) { not.textContent = "oturum okunamadı"; return; }
+        var m = btoa(JSON.stringify({ a: o.access_token, r: o.refresh_token }));
+        var bitti = function () { not.textContent = "kopyalandı — diğer cihazda „Girişli cihazdan aktar”ı seçip yapıştır"; };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(m).then(bitti, function () { gosterMetin(m); });
+        } else gosterMetin(m);
+      });
+    };
     panel.querySelector("#ab-cik").onclick = function () {
       sb.auth.signOut().then(function () {
         kul = null; durum = "giris"; ciz(); panelKapat();
@@ -137,7 +187,7 @@
   /* ---- eşitleme ---- */
   function cek(zorla) {
     return sb.from("ajanda").select("veri,guncel").eq("id", kul.id).maybeSingle().then(function (r) {
-      if (r.error) { durum = "hata"; ciz(); return; }
+      if (r.error) { durum = "hata"; sonHata = r.error.message; ciz(); if (panel && kul) panelHesap(); return; }
       if (!r.data) { gonder(); return; }
       var uzakTs = new Date(r.data.guncel).getTime();
       if (zorla || uzakTs > ts() + 1500) {
@@ -161,10 +211,12 @@
     durum = "gonderiliyor"; ciz();
     var simdi = new Date();
     sb.from("ajanda").upsert({ id: kul.id, veri: JSON.parse(veri), guncel: simdi.toISOString() }).then(function (r) {
-      if (r.error) { durum = "hata"; ciz(); return; }
+      if (r.error) { durum = "hata"; sonHata = r.error.message; ciz(); if (panel && kul) panelHesap(); return; }
       sonGonderilen = veri;
+      sonHata = null;
       tsYaz(simdi.getTime());
       durum = "esitlendi"; ciz();
+      if (panel && kul) panelHesap();
     });
   }
 

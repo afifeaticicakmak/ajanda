@@ -13,6 +13,7 @@
   var TS = "ajanda-v3-ts";
 
   var sb = null, kul = null, durum = "yukleniyor", zamanlayici = null, sonGonderilen = null, sonHata = null;
+  var kirli = false, sonUzak = null, sonYerel = null;
 
   function ts() { return Number(window.localStorage.getItem(TS) || 0); }
   function tsYaz(v) { window.localStorage.setItem(TS, String(v)); }
@@ -158,6 +159,7 @@
     panel.querySelector("#ab-gonder").onclick = function () {
       panel.querySelector("#ab-not").textContent = "gönderiliyor…";
       sonGonderilen = null;
+      kirli = true;
       gonder();
       setTimeout(function () { if (panel && kul) panelHesap(); }, 900);
     };
@@ -188,34 +190,46 @@
   function cek(zorla) {
     return sb.from("ajanda").select("veri,guncel").eq("id", kul.id).maybeSingle().then(function (r) {
       if (r.error) { durum = "hata"; sonHata = r.error.message; ciz(); if (panel && kul) panelHesap(); return -1; }
-      if (!r.data) { return 0; }
-      var uzakTs = new Date(r.data.guncel).getTime();
-      if (zorla || uzakTs > ts() + 1500) {
-        var yeni = JSON.stringify(r.data.veri || {});
+      if (!r.data) { if (ham() !== "{}") gonder(); return 0; }
+      var uzak = r.data.guncel;
+      var yeni = JSON.stringify(r.data.veri || {});
+
+      // bulutta bizim gönderdiğimizden başka bir kayıt var mı?
+      var baskasi = (uzak !== sonUzak);
+
+      if (zorla || (baskasi && !kirli)) {
+        sonUzak = uzak;
         if (yeni !== ham()) {
           window.localStorage.setItem(VERI, yeni);
-          tsYaz(uzakTs);
+          sonYerel = yeni;
+          kirli = false;
+          tsYaz(new Date(uzak).getTime());
           window.location.reload();
-          return uzakTs;
+          return 1;
         }
-        tsYaz(uzakTs);
+      } else if (kirli) {
+        gonder();
+        return 1;
       }
+      if (sonUzak === null) sonUzak = uzak;
       durum = "esitlendi"; ciz();
       if (panel && kul) panelHesap();
-      return uzakTs;
+      return 1;
     });
   }
 
   function gonder() {
     var veri = ham();
-    if (veri === sonGonderilen) { durum = "esitlendi"; ciz(); return; }
     durum = "gonderiliyor"; ciz();
-    var simdi = new Date();
-    sb.from("ajanda").upsert({ id: kul.id, veri: JSON.parse(veri), guncel: simdi.toISOString() }).then(function (r) {
+    var simdi = new Date().toISOString();
+    sb.from("ajanda").upsert({ id: kul.id, veri: JSON.parse(veri), guncel: simdi }).then(function (r) {
       if (r.error) { durum = "hata"; sonHata = r.error.message; ciz(); if (panel && kul) panelHesap(); return; }
       sonGonderilen = veri;
+      sonUzak = simdi;
+      sonYerel = veri;
+      kirli = false;
       sonHata = null;
-      tsYaz(simdi.getTime());
+      tsYaz(Date.now());
       durum = "esitlendi"; ciz();
       if (panel && kul) panelHesap();
     });
@@ -229,15 +243,17 @@
 
   function ilkEsitle() {
     durum = "esitlendi"; ciz();
-    cek(false).then(function (uzakTs) {
-      // yerel veri buluttakinden yeniyse gönder; eskiyse dokunma
-      if (uzakTs === -1) return;
-      if (ham() === "{}") return;
-      if (uzakTs === 0 || ts() > uzakTs) gonder();
-    });
+    sonYerel = ham();
+    cek(false);
     if (!window.__abDongu) {
       window.__abDongu = true;
-      setInterval(function () { if (kul && !document.hidden) cek(false); }, 8000);
+      // yerel değişti mi — kancaya güvenmeden
+      setInterval(function () {
+        if (!kul) return;
+        var v = ham();
+        if (v !== sonYerel) { sonYerel = v; kirli = true; gonderSonra(); }
+      }, 1500);
+      setInterval(function () { if (kul && !document.hidden) cek(false); }, 6000);
       document.addEventListener("visibilitychange", function () { if (!document.hidden && kul) cek(false); });
       window.addEventListener("focus", function () { if (kul) cek(false); });
     }
@@ -247,7 +263,7 @@
   var asilSet = window.localStorage.setItem.bind(window.localStorage);
   window.localStorage.setItem = function (k, v) {
     asilSet(k, v);
-    if (k === VERI) { tsYaz(Date.now()); gonderSonra(); }
+    if (k === VERI) { kirli = true; tsYaz(Date.now()); gonderSonra(); }
   };
 
   /* ---- başlat ---- */

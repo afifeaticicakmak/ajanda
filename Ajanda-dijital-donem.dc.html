@@ -39,9 +39,9 @@ input::placeholder, textarea::placeholder { color:#cfccc9; }
 
 <doc-page width="1040px" height="1387px" style="font-family:Lora,serif;color:#201e1d"><sc-for list="{{ donemler }}" as="p" hint-placeholder-count="2"><section class="page" id="{{ p.id }}" style="position:relative;background:#fdfcfa;overflow:hidden">
     <sc-for list="{{ p.fotolar }}" as="f" hint-placeholder-count="0">
-      <span style="position:absolute;left:{{ f.sol }};top:{{ f.ust }};width:{{ f.en }};z-index:{{ f.z }};cursor:move;transform:{{ f.aci }};transform-origin:50% 50%" onMouseDown="{{ f.bas }}" onMouseEnter="{{ f.gir }}" onMouseLeave="{{ f.cik }}">
+      <span style="position:absolute;left:{{ f.sol }};top:{{ f.ust }};width:{{ f.en }};z-index:{{ f.z }};cursor:move;touch-action:none;transform:{{ f.aci }};transform-origin:50% 50%" data-sticker="1" onMouseDown="{{ f.bas }}" onTouchStart="{{ f.dokunBas }}" onMouseEnter="{{ f.gir }}" onMouseLeave="{{ f.cik }}">
         <span style="display:block">{{ f.gorsel }}</span>
-        <span onClick="{{ f.sil }}" style="position:absolute;right:-9px;top:-9px;width:20px;height:20px;border-radius:50%;background:#fdfcfa;border:1px solid #cfccc9;display:flex;align-items:center;justify-content:center;font:400 13px Lora,serif;color:#8d8a87;cursor:pointer;opacity:{{ f.tut }};transition:opacity 0.12s">×</span><span onMouseDown="{{ f.boyut }}" style="position:absolute;right:-8px;bottom:-8px;width:18px;height:18px;border-radius:50%;background:#fdfcfa;border:1px solid #cfccc9;display:flex;align-items:center;justify-content:center;font:400 11px Lora,serif;color:#8d8a87;cursor:nwse-resize;opacity:{{ f.tut }};transition:opacity 0.12s">⤢</span><span onMouseDown="{{ f.don }}" style="position:absolute;left:-8px;bottom:-8px;width:18px;height:18px;border-radius:50%;background:#fdfcfa;border:1px solid #cfccc9;display:flex;align-items:center;justify-content:center;font:400 11px Lora,serif;color:#8d8a87;cursor:grab;opacity:{{ f.tut }};transition:opacity 0.12s">↻</span>
+        <span onClick="{{ f.sil }}" style="position:absolute;right:-9px;top:-9px;touch-action:none;width:20px;height:20px;border-radius:50%;background:#fdfcfa;border:1px solid #cfccc9;display:flex;align-items:center;justify-content:center;font:400 13px Lora,serif;color:#8d8a87;cursor:pointer;opacity:{{ f.tut }};transition:opacity 0.12s">×</span><span onMouseDown="{{ f.boyut }}" onTouchStart="{{ f.boyut }}" style="position:absolute;right:-8px;bottom:-8px;touch-action:none;width:18px;height:18px;border-radius:50%;background:#fdfcfa;border:1px solid #cfccc9;display:flex;align-items:center;justify-content:center;font:400 11px Lora,serif;color:#8d8a87;cursor:nwse-resize;opacity:{{ f.tut }};transition:opacity 0.12s">⤢</span><span onMouseDown="{{ f.don }}" onTouchStart="{{ f.don }}" style="position:absolute;left:-8px;bottom:-8px;touch-action:none;width:18px;height:18px;border-radius:50%;background:#fdfcfa;border:1px solid #cfccc9;display:flex;align-items:center;justify-content:center;font:400 11px Lora,serif;color:#8d8a87;cursor:grab;opacity:{{ f.tut }};transition:opacity 0.12s">↻</span>
       </span>
     </sc-for>
     <span style="position:absolute;right:14px;top:86px;z-index:6;display:flex;gap:6px"><span onClick="{{ p.stickerEkle }}" style="padding:4px 11px;border:1px solid #e0cdbd;border-radius:12px;background:#fdfcfa;font:400 11px Lora,serif;letter-spacing:0.06em;color:#c4885b;cursor:pointer">＋ STICKER</span><span onClick="{{ p.fotoEkle }}" style="padding:4px 11px;border:1px solid #cfccc9;border-radius:12px;background:#fdfcfa;font:400 11px Lora,serif;letter-spacing:0.06em;color:#8d8a87;cursor:pointer">＋ FOTOĞRAF</span></span>
@@ -112,9 +112,9 @@ input::placeholder, textarea::placeholder { color:#cfccc9; }
     </div>
   </section></sc-for><sc-for list="{{ programlar }}" as="p" hint-placeholder-count="2"><section class="page" id="{{ p.id }}" style="position:relative;background:#fdfcfa;overflow:hidden">
     <sc-for list="{{ p.fotolar }}" as="f" hint-placeholder-count="0">
-      <span style="position:absolute;left:{{ f.sol }};top:{{ f.ust }};width:{{ f.en }};z-index:{{ f.z }};cursor:move;transform:{{ f.aci }};transform-origin:50% 50%" onMouseDown="{{ f.bas }}" onMouseEnter="{{ f.gir }}" onMouseLeave="{{ f.cik }}">
+      <span style="position:absolute;left:{{ f.sol }};top:{{ f.ust }};width:{{ f.en }};z-index:{{ f.z }};cursor:move;touch-action:none;transform:{{ f.aci }};transform-origin:50% 50%" data-sticker="1" onMouseDown="{{ f.bas }}" onTouchStart="{{ f.dokunBas }}" onMouseEnter="{{ f.gir }}" onMouseLeave="{{ f.cik }}">
         <span style="display:block">{{ f.gorsel }}</span>
-        <span onClick="{{ f.sil }}" style="position:absolute;right:-9px;top:-9px;width:20px;height:20px;border-radius:50%;background:#fdfcfa;border:1px solid #cfccc9;display:flex;align-items:center;justify-content:center;font:400 13px Lora,serif;color:#8d8a87;cursor:pointer;opacity:{{ f.tut }};transition:opacity 0.12s">×</span><span onMouseDown="{{ f.boyut }}" style="position:absolute;right:-8px;bottom:-8px;width:18px;height:18px;border-radius:50%;background:#fdfcfa;border:1px solid #cfccc9;display:flex;align-items:center;justify-content:center;font:400 11px Lora,serif;color:#8d8a87;cursor:nwse-resize;opacity:{{ f.tut }};transition:opacity 0.12s">⤢</span><span onMouseDown="{{ f.don }}" style="position:absolute;left:-8px;bottom:-8px;width:18px;height:18px;border-radius:50%;background:#fdfcfa;border:1px solid #cfccc9;display:flex;align-items:center;justify-content:center;font:400 11px Lora,serif;color:#8d8a87;cursor:grab;opacity:{{ f.tut }};transition:opacity 0.12s">↻</span>
+        <span onClick="{{ f.sil }}" style="position:absolute;right:-9px;top:-9px;touch-action:none;width:20px;height:20px;border-radius:50%;background:#fdfcfa;border:1px solid #cfccc9;display:flex;align-items:center;justify-content:center;font:400 13px Lora,serif;color:#8d8a87;cursor:pointer;opacity:{{ f.tut }};transition:opacity 0.12s">×</span><span onMouseDown="{{ f.boyut }}" onTouchStart="{{ f.boyut }}" style="position:absolute;right:-8px;bottom:-8px;touch-action:none;width:18px;height:18px;border-radius:50%;background:#fdfcfa;border:1px solid #cfccc9;display:flex;align-items:center;justify-content:center;font:400 11px Lora,serif;color:#8d8a87;cursor:nwse-resize;opacity:{{ f.tut }};transition:opacity 0.12s">⤢</span><span onMouseDown="{{ f.don }}" onTouchStart="{{ f.don }}" style="position:absolute;left:-8px;bottom:-8px;touch-action:none;width:18px;height:18px;border-radius:50%;background:#fdfcfa;border:1px solid #cfccc9;display:flex;align-items:center;justify-content:center;font:400 11px Lora,serif;color:#8d8a87;cursor:grab;opacity:{{ f.tut }};transition:opacity 0.12s">↻</span>
       </span>
     </sc-for>
     <span style="position:absolute;right:14px;top:86px;z-index:6;display:flex;gap:6px"><span onClick="{{ p.stickerEkle }}" style="padding:4px 11px;border:1px solid #e0cdbd;border-radius:12px;background:#fdfcfa;font:400 11px Lora,serif;letter-spacing:0.06em;color:#c4885b;cursor:pointer">＋ STICKER</span><span onClick="{{ p.fotoEkle }}" style="padding:4px 11px;border:1px solid #cfccc9;border-radius:12px;background:#fdfcfa;font:400 11px Lora,serif;letter-spacing:0.06em;color:#8d8a87;cursor:pointer">＋ FOTOĞRAF</span></span>
@@ -171,9 +171,9 @@ input::placeholder, textarea::placeholder { color:#cfccc9; }
     </div>
   </section></sc-for><sc-for list="{{ enerjiler }}" as="p" hint-placeholder-count="3"><section class="page" id="{{ p.id }}" style="position:relative;background:#fdfcfa;overflow:hidden">
     <sc-for list="{{ p.fotolar }}" as="f" hint-placeholder-count="0">
-      <span style="position:absolute;left:{{ f.sol }};top:{{ f.ust }};width:{{ f.en }};z-index:{{ f.z }};cursor:move;transform:{{ f.aci }};transform-origin:50% 50%" onMouseDown="{{ f.bas }}" onMouseEnter="{{ f.gir }}" onMouseLeave="{{ f.cik }}">
+      <span style="position:absolute;left:{{ f.sol }};top:{{ f.ust }};width:{{ f.en }};z-index:{{ f.z }};cursor:move;touch-action:none;transform:{{ f.aci }};transform-origin:50% 50%" data-sticker="1" onMouseDown="{{ f.bas }}" onTouchStart="{{ f.dokunBas }}" onMouseEnter="{{ f.gir }}" onMouseLeave="{{ f.cik }}">
         <span style="display:block">{{ f.gorsel }}</span>
-        <span onClick="{{ f.sil }}" style="position:absolute;right:-9px;top:-9px;width:20px;height:20px;border-radius:50%;background:#fdfcfa;border:1px solid #cfccc9;display:flex;align-items:center;justify-content:center;font:400 13px Lora,serif;color:#8d8a87;cursor:pointer;opacity:{{ f.tut }};transition:opacity 0.12s">×</span><span onMouseDown="{{ f.boyut }}" style="position:absolute;right:-8px;bottom:-8px;width:18px;height:18px;border-radius:50%;background:#fdfcfa;border:1px solid #cfccc9;display:flex;align-items:center;justify-content:center;font:400 11px Lora,serif;color:#8d8a87;cursor:nwse-resize;opacity:{{ f.tut }};transition:opacity 0.12s">⤢</span><span onMouseDown="{{ f.don }}" style="position:absolute;left:-8px;bottom:-8px;width:18px;height:18px;border-radius:50%;background:#fdfcfa;border:1px solid #cfccc9;display:flex;align-items:center;justify-content:center;font:400 11px Lora,serif;color:#8d8a87;cursor:grab;opacity:{{ f.tut }};transition:opacity 0.12s">↻</span>
+        <span onClick="{{ f.sil }}" style="position:absolute;right:-9px;top:-9px;touch-action:none;width:20px;height:20px;border-radius:50%;background:#fdfcfa;border:1px solid #cfccc9;display:flex;align-items:center;justify-content:center;font:400 13px Lora,serif;color:#8d8a87;cursor:pointer;opacity:{{ f.tut }};transition:opacity 0.12s">×</span><span onMouseDown="{{ f.boyut }}" onTouchStart="{{ f.boyut }}" style="position:absolute;right:-8px;bottom:-8px;touch-action:none;width:18px;height:18px;border-radius:50%;background:#fdfcfa;border:1px solid #cfccc9;display:flex;align-items:center;justify-content:center;font:400 11px Lora,serif;color:#8d8a87;cursor:nwse-resize;opacity:{{ f.tut }};transition:opacity 0.12s">⤢</span><span onMouseDown="{{ f.don }}" onTouchStart="{{ f.don }}" style="position:absolute;left:-8px;bottom:-8px;touch-action:none;width:18px;height:18px;border-radius:50%;background:#fdfcfa;border:1px solid #cfccc9;display:flex;align-items:center;justify-content:center;font:400 11px Lora,serif;color:#8d8a87;cursor:grab;opacity:{{ f.tut }};transition:opacity 0.12s">↻</span>
       </span>
     </sc-for>
     <span style="position:absolute;right:14px;top:86px;z-index:6;display:flex;gap:6px"><span onClick="{{ p.stickerEkle }}" style="padding:4px 11px;border:1px solid #e0cdbd;border-radius:12px;background:#fdfcfa;font:400 11px Lora,serif;letter-spacing:0.06em;color:#c4885b;cursor:pointer">＋ STICKER</span><span onClick="{{ p.fotoEkle }}" style="padding:4px 11px;border:1px solid #cfccc9;border-radius:12px;background:#fdfcfa;font:400 11px Lora,serif;letter-spacing:0.06em;color:#8d8a87;cursor:pointer">＋ FOTOĞRAF</span></span>
@@ -245,9 +245,9 @@ input::placeholder, textarea::placeholder { color:#cfccc9; }
     </div>
   </section></sc-for><sc-for list="{{ onemliler }}" as="p" hint-placeholder-count="3"><section class="page" id="{{ p.id }}" style="position:relative;background:#fdfcfa;overflow:hidden">
     <sc-for list="{{ p.fotolar }}" as="f" hint-placeholder-count="0">
-      <span style="position:absolute;left:{{ f.sol }};top:{{ f.ust }};width:{{ f.en }};z-index:{{ f.z }};cursor:move;transform:{{ f.aci }};transform-origin:50% 50%" onMouseDown="{{ f.bas }}" onMouseEnter="{{ f.gir }}" onMouseLeave="{{ f.cik }}">
+      <span style="position:absolute;left:{{ f.sol }};top:{{ f.ust }};width:{{ f.en }};z-index:{{ f.z }};cursor:move;touch-action:none;transform:{{ f.aci }};transform-origin:50% 50%" data-sticker="1" onMouseDown="{{ f.bas }}" onTouchStart="{{ f.dokunBas }}" onMouseEnter="{{ f.gir }}" onMouseLeave="{{ f.cik }}">
         <span style="display:block">{{ f.gorsel }}</span>
-        <span onClick="{{ f.sil }}" style="position:absolute;right:-9px;top:-9px;width:20px;height:20px;border-radius:50%;background:#fdfcfa;border:1px solid #cfccc9;display:flex;align-items:center;justify-content:center;font:400 13px Lora,serif;color:#8d8a87;cursor:pointer;opacity:{{ f.tut }};transition:opacity 0.12s">×</span><span onMouseDown="{{ f.boyut }}" style="position:absolute;right:-8px;bottom:-8px;width:18px;height:18px;border-radius:50%;background:#fdfcfa;border:1px solid #cfccc9;display:flex;align-items:center;justify-content:center;font:400 11px Lora,serif;color:#8d8a87;cursor:nwse-resize;opacity:{{ f.tut }};transition:opacity 0.12s">⤢</span><span onMouseDown="{{ f.don }}" style="position:absolute;left:-8px;bottom:-8px;width:18px;height:18px;border-radius:50%;background:#fdfcfa;border:1px solid #cfccc9;display:flex;align-items:center;justify-content:center;font:400 11px Lora,serif;color:#8d8a87;cursor:grab;opacity:{{ f.tut }};transition:opacity 0.12s">↻</span>
+        <span onClick="{{ f.sil }}" style="position:absolute;right:-9px;top:-9px;touch-action:none;width:20px;height:20px;border-radius:50%;background:#fdfcfa;border:1px solid #cfccc9;display:flex;align-items:center;justify-content:center;font:400 13px Lora,serif;color:#8d8a87;cursor:pointer;opacity:{{ f.tut }};transition:opacity 0.12s">×</span><span onMouseDown="{{ f.boyut }}" onTouchStart="{{ f.boyut }}" style="position:absolute;right:-8px;bottom:-8px;touch-action:none;width:18px;height:18px;border-radius:50%;background:#fdfcfa;border:1px solid #cfccc9;display:flex;align-items:center;justify-content:center;font:400 11px Lora,serif;color:#8d8a87;cursor:nwse-resize;opacity:{{ f.tut }};transition:opacity 0.12s">⤢</span><span onMouseDown="{{ f.don }}" onTouchStart="{{ f.don }}" style="position:absolute;left:-8px;bottom:-8px;touch-action:none;width:18px;height:18px;border-radius:50%;background:#fdfcfa;border:1px solid #cfccc9;display:flex;align-items:center;justify-content:center;font:400 11px Lora,serif;color:#8d8a87;cursor:grab;opacity:{{ f.tut }};transition:opacity 0.12s">↻</span>
       </span>
     </sc-for>
     <span style="position:absolute;right:14px;top:86px;z-index:6;display:flex;gap:6px"><span onClick="{{ p.stickerEkle }}" style="padding:4px 11px;border:1px solid #e0cdbd;border-radius:12px;background:#fdfcfa;font:400 11px Lora,serif;letter-spacing:0.06em;color:#c4885b;cursor:pointer">＋ STICKER</span><span onClick="{{ p.fotoEkle }}" style="padding:4px 11px;border:1px solid #cfccc9;border-radius:12px;background:#fdfcfa;font:400 11px Lora,serif;letter-spacing:0.06em;color:#8d8a87;cursor:pointer">＋ FOTOĞRAF</span></span>
@@ -303,6 +303,7 @@ class Component extends DCLogic {
   state = { d: (function () { try { return JSON.parse(window.localStorage.getItem("ajanda-v3") || "{}"); } catch (e) { return {}; } })(), yuk: true };
 
   componentDidMount() {
+    this.__disDokun();
     (function () {
       const bas = Date.now();
       const t = window.setInterval(function () {
@@ -383,6 +384,7 @@ class Component extends DCLogic {
           gorsel: React.createElement("img", { src: f.src, alt: "", style: { display: "block", width: "100%", height: "auto" } }),
           sol: f.x + "px", ust: f.y + "px", en: f.w + "px",
           bas: function (e) { self.fotoSurukle(anahtar, i, e); },
+          dokunBas: function (e) { self.setState({ hv: anahtar + "-" + i }); self.fotoSurukle(anahtar, i, e); },
           boyut: function (e) { self.fotoBoyut(anahtar, i, e); },
           don: function (e) { self.fotoDondur(anahtar, i, e); },
           aci: "rotate(" + (f.a || 0) + "deg)",
@@ -549,68 +551,85 @@ stickerAl(anahtar) {
   }
 
   fotoDondur(anahtar, i, e) {
-    e.preventDefault(); e.stopPropagation();
+    if (e.cancelable) e.preventDefault();
+    e.stopPropagation();
     const self = this;
     const kutu = e.currentTarget.parentElement.getBoundingClientRect();
     const mx = kutu.left + kutu.width / 2, my = kutu.top + kutu.height / 2;
-    const hareket = function (ev) {
+    self.__izle(function (ev) {
+      const p = self.__nokta(ev);
       const a = (self.al(anahtar) || []).slice();
       if (!a[i]) return;
-      let d = Math.atan2(ev.clientY - my, ev.clientX - mx) * 180 / Math.PI + 135;
-      d = Math.round(d / 3) * 3;
-      a[i] = Object.assign({}, a[i], { a: d });
-      self.setState(function (st) { const dd = Object.assign({}, st.d); dd[anahtar] = a; return { d: dd }; });
-    };
-    const birak = function () {
-      window.removeEventListener("mousemove", hareket);
-      window.removeEventListener("mouseup", birak);
-      self.kaydet(self.state.d);
-    };
-    window.addEventListener("mousemove", hareket);
-    window.addEventListener("mouseup", birak);
+      let g = Math.atan2(p.y - my, p.x - mx) * 180 / Math.PI + 135;
+      g = Math.round(g / 3) * 3;
+      a[i] = Object.assign({}, a[i], { a: g });
+      self.setState(function (st) { const d = Object.assign({}, st.d); d[anahtar] = a; return { d: d }; });
+    }, function () { self.kaydet(self.state.d); });
   }
 
   fotoBoyut(anahtar, i, e) {
-    e.preventDefault(); e.stopPropagation();
+    if (e.cancelable) e.preventDefault();
+    e.stopPropagation();
     const self = this;
     const b = (this.al(anahtar) || [])[i];
     if (!b) return;
-    const x0 = e.clientX, bw = b.w || 200;
-    const hareket = function (ev) {
+    const p0 = self.__nokta(e), bw = b.w || 200;
+    self.__izle(function (ev) {
+      const p = self.__nokta(ev);
       const a = (self.al(anahtar) || []).slice();
       if (!a[i]) return;
-      const en = Math.max(40, Math.min(900, Math.round(bw + (ev.clientX - x0))));
+      const en = Math.max(40, Math.min(900, Math.round(bw + (p.x - p0.x))));
       a[i] = Object.assign({}, a[i], { w: en });
       self.setState(function (st) { const d = Object.assign({}, st.d); d[anahtar] = a; return { d: d }; });
+    }, function () { self.kaydet(self.state.d); });
+  }
+
+  __disDokun() {
+    if (this.__disKurulu) return;
+    this.__disKurulu = true;
+    const self = this;
+    document.addEventListener("touchstart", function (e) {
+      if (!self.state.hv) return;
+      const h = e.target.closest && e.target.closest("[data-sticker]");
+      if (!h) self.setState({ hv: null });
+    }, true);
+  }
+
+  __nokta(e) {
+    const t = (e.touches && e.touches[0]) || (e.changedTouches && e.changedTouches[0]);
+    return t ? { x: t.clientX, y: t.clientY } : { x: e.clientX, y: e.clientY };
+  }
+
+  __izle(hareket, birak) {
+    const sar = function (ev) { if (ev.cancelable) ev.preventDefault(); hareket(ev); };
+    const son = function () {
+      window.removeEventListener("mousemove", sar);
+      window.removeEventListener("mouseup", son);
+      window.removeEventListener("touchmove", sar);
+      window.removeEventListener("touchend", son);
+      window.removeEventListener("touchcancel", son);
+      birak();
     };
-    const birak = function () {
-      window.removeEventListener("mousemove", hareket);
-      window.removeEventListener("mouseup", birak);
-      self.kaydet(self.state.d);
-    };
-    window.addEventListener("mousemove", hareket);
-    window.addEventListener("mouseup", birak);
+    window.addEventListener("mousemove", sar);
+    window.addEventListener("mouseup", son);
+    window.addEventListener("touchmove", sar, { passive: false });
+    window.addEventListener("touchend", son);
+    window.addEventListener("touchcancel", son);
   }
 
   fotoSurukle(anahtar, i, e) {
     const self = this;
-    e.preventDefault();
+    if (e.cancelable) e.preventDefault();
     const b = (self.al(anahtar) || [])[i];
     if (!b) return;
-    const x0 = e.clientX, y0 = e.clientY, bx = b.x, by = b.y;
-    const hareket = function (ev) {
+    const p0 = self.__nokta(e), bx = b.x, by = b.y;
+    self.__izle(function (ev) {
+      const p = self.__nokta(ev);
       const a = (self.al(anahtar) || []).slice();
       if (!a[i]) return;
-      a[i] = Object.assign({}, a[i], { x: Math.round(bx + ev.clientX - x0), y: Math.round(by + ev.clientY - y0) });
+      a[i] = Object.assign({}, a[i], { x: Math.round(bx + p.x - p0.x), y: Math.round(by + p.y - p0.y) });
       self.setState(function (st) { const d = Object.assign({}, st.d); d[anahtar] = a; return { d: d }; });
-    };
-    const birak = function () {
-      window.removeEventListener("mousemove", hareket);
-      window.removeEventListener("mouseup", birak);
-      self.kaydet(self.state.d);
-    };
-    window.addEventListener("mousemove", hareket);
-    window.addEventListener("mouseup", birak);
+    }, function () { self.kaydet(self.state.d); });
   }
 
   fotoKur(liste) {

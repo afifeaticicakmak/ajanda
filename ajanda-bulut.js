@@ -187,8 +187,8 @@
   /* ---- eşitleme ---- */
   function cek(zorla) {
     return sb.from("ajanda").select("veri,guncel").eq("id", kul.id).maybeSingle().then(function (r) {
-      if (r.error) { durum = "hata"; sonHata = r.error.message; ciz(); if (panel && kul) panelHesap(); return; }
-      if (!r.data) { gonder(); return; }
+      if (r.error) { durum = "hata"; sonHata = r.error.message; ciz(); if (panel && kul) panelHesap(); return -1; }
+      if (!r.data) { return 0; }
       var uzakTs = new Date(r.data.guncel).getTime();
       if (zorla || uzakTs > ts() + 1500) {
         var yeni = JSON.stringify(r.data.veri || {});
@@ -196,12 +196,13 @@
           window.localStorage.setItem(VERI, yeni);
           tsYaz(uzakTs);
           window.location.reload();
-          return;
+          return uzakTs;
         }
         tsYaz(uzakTs);
       }
       durum = "esitlendi"; ciz();
       if (panel && kul) panelHesap();
+      return uzakTs;
     });
   }
 
@@ -223,17 +224,20 @@
   function gonderSonra() {
     if (!kul) return;
     clearTimeout(zamanlayici);
-    zamanlayici = setTimeout(gonder, 1400);
+    zamanlayici = setTimeout(gonder, 700);
   }
 
   function ilkEsitle() {
     durum = "esitlendi"; ciz();
-    cek(false).then(function () {
-      if (ham() !== "{}") gonder();
+    cek(false).then(function (uzakTs) {
+      // yerel veri buluttakinden yeniyse gönder; eskiyse dokunma
+      if (uzakTs === -1) return;
+      if (ham() === "{}") return;
+      if (uzakTs === 0 || ts() > uzakTs) gonder();
     });
     if (!window.__abDongu) {
       window.__abDongu = true;
-      setInterval(function () { if (kul && !document.hidden) cek(false); }, 12000);
+      setInterval(function () { if (kul && !document.hidden) cek(false); }, 8000);
       document.addEventListener("visibilitychange", function () { if (!document.hidden && kul) cek(false); });
       window.addEventListener("focus", function () { if (kul) cek(false); });
     }

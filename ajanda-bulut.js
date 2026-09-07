@@ -64,7 +64,7 @@
       if (!mail) return;
       var not = panel.querySelector("#ab-not");
       not.textContent = "gönderiliyor…";
-      sb.auth.signInWithOtp({ email: mail, options: { shouldCreateUser: true, emailRedirectTo: location.origin + "/Ajanda-dijital.dc.html" } }).then(function (r) {
+      sb.auth.signInWithOtp({ email: mail, options: { shouldCreateUser: true, emailRedirectTo: location.href.split("#")[0].split("?")[0] } }).then(function (r) {
         if (r.error) { not.textContent = "olmadı: " + r.error.message; return; }
         panelKod(mail);
       });
@@ -113,9 +113,16 @@
     panel.innerHTML = baslik("EŞİTLEME") +
       '<div style="font:400 14px Lora,serif;color:#201e1d;padding-bottom:4px">' + (kul.email || "") + '</div>' +
       '<div style="font:400 12px Lora,serif;color:#8d8a87">' + (t ? "son kayıt " + new Date(t).toLocaleString("tr-TR") : "henüz kayıt yok") + '</div>' +
+      '<div id="ab-gonder" style="' + DUGME + '">Buluta gönder</div>' +
       '<div id="ab-cek" style="' + DUGME + '">Buluttan getir</div>' +
       '<div id="ab-cik" style="' + DUGME + ';background:#fbfaf8;color:#8d8a87">Çıkış yap</div>' +
       '<div id="ab-not" style="font:400 12px/1.45 Lora,serif;color:#8d8a87;padding-top:10px"></div>';
+    panel.querySelector("#ab-gonder").onclick = function () {
+      panel.querySelector("#ab-not").textContent = "gönderiliyor…";
+      sonGonderilen = null;
+      gonder();
+      setTimeout(function () { if (panel && kul) panelHesap(); }, 900);
+    };
     panel.querySelector("#ab-cek").onclick = function () {
       panel.querySelector("#ab-not").textContent = "getiriliyor…";
       cek(true);
@@ -172,8 +179,12 @@
     cek(false).then(function () {
       if (ham() !== "{}") gonder();
     });
-    setInterval(function () { if (kul && !document.hidden) cek(false); }, 25000);
-    document.addEventListener("visibilitychange", function () { if (!document.hidden && kul) cek(false); });
+    if (!window.__abDongu) {
+      window.__abDongu = true;
+      setInterval(function () { if (kul && !document.hidden) cek(false); }, 12000);
+      document.addEventListener("visibilitychange", function () { if (!document.hidden && kul) cek(false); });
+      window.addEventListener("focus", function () { if (kul) cek(false); });
+    }
   }
 
   /* yerel yazmaları yakala */

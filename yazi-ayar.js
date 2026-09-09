@@ -48,6 +48,12 @@
     for (var i = 0; i < alan.length; i++) {
       var el = alan[i];
       if (el.closest("#__yazi-ayar-kok")) continue;
+      var ozgun = (el.getAttribute("style") || "");
+      if (/font-size/i.test(ozgun) && !alanlar[anahtar(el)]) {
+        el.style.removeProperty("font-family");
+        el.style.removeProperty("font-size");
+        continue;
+      }
       var s = ayarAl(el);
       var t = tipBul(s.t);
       el.style.setProperty("font-family", t.css, "important");
@@ -207,7 +213,17 @@
       if (e.target && e.target.style) e.target.style.removeProperty("outline");
     });
 
-    var izle = new MutationObserver(uygulaGecikmeli);
+    var izle = new MutationObserver(function (kayitlar) {
+      for (var i = 0; i < kayitlar.length; i++) {
+        var ek = kayitlar[i].addedNodes;
+        for (var j = 0; j < ek.length; j++) {
+          var d = ek[j];
+          if (d.nodeType !== 1) continue;
+          if (d.matches && d.matches(SEC)) { uygulaGecikmeli(); return; }
+          if (d.querySelector && d.querySelector(SEC)) { uygulaGecikmeli(); return; }
+        }
+      }
+    });
     izle.observe(document.body, { childList: true, subtree: true });
 
     var yazdirStil = document.createElement("style");

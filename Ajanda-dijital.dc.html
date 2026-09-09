@@ -35,7 +35,7 @@ input::placeholder, textarea::placeholder { color:#cfccc9; }
 <link rel="mask-icon" href="./ikon2-192.png" color="#8a7526" />
 <script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("./sw.js").catch(function(){});});}</script>
 <script src="./ajanda-bulut.js?v=3"></script>
-<script src="./yazi-ayar.js?v=2"></script>
+<script src="./yazi-ayar.js?v=4"></script>
 <script src="./rehber.js?v=10"></script>
 </helmet>
 
@@ -410,7 +410,12 @@ input::placeholder, textarea::placeholder { color:#cfccc9; }
         <a href="{{ s.href }}" style="flex:1;position:relative;overflow:hidden;background:{{ s.renk }};border:2px solid #fdfcfa;box-shadow:{{ s.ic }};opacity:{{ s.op }}"><span style="position:absolute;inset:0;overflow:hidden;opacity:0.62;mix-blend-mode:multiply">{{ s.mgEl }}</span><span style="position:absolute;inset:0;background:{{ s.renk }};opacity:0.3"></span></a>
       </sc-for>
     </div>
-    <div style="position:absolute;left:0;right:0;top:74px;bottom:0;padding:44px 62px 34px;display:flex;flex-direction:column;gap:18px">
+    <div style="position:absolute;left:0;top:74px;bottom:0;width:84px;background:#f6f4f1;border-right:1px solid #e6e2df;display:flex;flex-direction:column">
+      <sc-for list="{{ p.yan }}" as="y" hint-placeholder-count="7">
+        <a href="{{ y.href }}" style="flex:1;display:flex;align-items:center;justify-content:center;border-bottom:1px solid #eae7e3;background:{{ y.bg }};font:400 12px Lora,serif;color:{{ y.fg }};text-align:center;padding:0 3px;text-decoration:none">{{ y.ad }}</a>
+      </sc-for>
+    </div>
+    <div style="position:absolute;left:84px;right:0;top:74px;bottom:0;padding:40px 54px 30px;display:flex;flex-direction:column;gap:16px">
       <div style="flex:none;border-bottom:1.5px solid #201e1d;padding-bottom:10px;display:flex;align-items:flex-end;justify-content:space-between">
         <span style="font:400 38px Lora,serif;letter-spacing:-0.01em">{{ p.baslik }}</span>
         <span style="font:400 13px Lora,serif;letter-spacing:0.14em;color:#a9a6a3">{{ p.etiket }}</span>
@@ -2991,6 +2996,10 @@ stickerAl(anahtar) {
       rOgrenciler: R("ogrenciler"), rKisiler: R("kisiler"), rDefter: R("defter"),
       yedekAl: () => this.yedekAl(),
       yedekYukle: () => this.yedekYukle(),
+      tocYan: (function (self) {
+        const ADLAR = ["Bugün","Yıl","Dönem","Ay","Hafta","Gün","Takip","Notlar"];
+        return SERIT.map((k, i) => ({ ad: ADLAR[i], href: k.href, renk: k.renk, op: serit(-1)[i] && serit(-1)[i].op ? serit(-1)[i].op : 1 }));
+      })(this),
       sekBos: serit(-1), sekYil: serit(1), sekAy: serit(3), sekTakip: serit(6), sekNot: serit(7),
       gunKisa: GUNK,
       ayiricilar: (() => {
@@ -3179,6 +3188,7 @@ stickerAl(anahtar) {
               { ad: "Renklendirmek", ne: "Saat, öncelik ve enerji satırlarının sağındaki nokta altı renk arasında döner. Aynı rengi verdiğin işler birbirine bağlı okunur.", sim: renkler3() },
               { ad: "Ertelemek", ne: "Enerji işlerinin yanındaki üç noktadan birine dokun; iş ertesi güne geçer, burada üstü çizili kalır. Üçüncüde uyarır.", sim: noktalar("#c99a9b", 1) },
               { ad: "Satır eklemek", ne: "Listelerin altındaki \uFF0B yeni satır açar, \u2212 son satırı kaldırır. Alışkanlıkta sekiz satır hazır, on dörde kadar çıkar.", sim: sp({ display: "flex", gap: "8px", font: "400 15px Lora,serif", color: "#8d8a87" }, "\uFF0B", "\u2212") },
+              { ad: "Derecelendirmek", ne: "Alışkanlık hücrelerine dokundukça 1–5 arası koyulaşır: bir dokunuş az, beş dokunuş tam. Altıncı dokunuş boşaltır, boş gün de bir veri.", sim: sp({ display: "flex", gap: "4px", alignItems: "flex-end" }, [1, 2, 3, 4, 5].map((v) => sp({ key: v, width: "12px", height: "20px", borderRadius: "2px", background: "#9ab7b0", opacity: 0.22 + v * 0.15 }))) },
               { ad: "Uyku", ne: "Kalktığın ve yattığın saati yaz; süre kendiliğinden çıkar ve Bugün sayfasında aylık grafiğe döner.", sim: cubuklar([60, 80, 45, 75], "#8fb4d4") },
               { ad: "Enerji", ne: "İşleri enerjine göre böl. İşaretlediğin kutular Dönem ve Takip bölümündeki enerji haritasına ve grafiğine dönüşür.", sim: cubuklar([55, 85, 35, 70], "#c99a9b") },
               { ad: "Yeni boş sayfa", ne: "Günlük sayfadaki notlar sekmesinden istediğin kadar boş sayfa açılır; o güne bağlı kalır.", sim: sayfaSim("#ded9d4") }
@@ -3249,7 +3259,14 @@ stickerAl(anahtar) {
           }
         ];
         const ADI = ["Bir sayfada ne nerede", "Planlamak", "İşaretlemek ve yazmak", "Takip etmek", "Yazmak ve düşünmek", "Süslemek", "Kendine ayarlamak"];
+        const KISA = ["Ne nerede", "Planlamak", "İşaretlemek", "Takip", "Yazmak", "Süslemek", "Ayarlar"];
+        const RENKLI = ["#c4885b", "#a89ac4", "#8fae9b", "#9ab7b0", "#d9a273", "#c4885b", "#8d8a87"];
         return veri.map((v, i) => Object.assign({}, v, {
+          yan: KISA.map((ad, k) => ({
+            ad, href: R(k === 0 ? "rehber" : "rehber-" + (k + 1)),
+            bg: k === i ? "#fdfcfa" : "transparent",
+            fg: k === i ? "#201e1d" : "#8d8a87"
+          })),
           id: i === 0 ? "rehber" : "rehber-" + (i + 1),
           etiket: (i + 1) + " / 7 \u00b7 " + v.etiket,
           geri: i === 0 ? "\u2039 İçindekiler" : "\u2039 " + ADI[i - 1],

@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=1040, minimum-scale=0.2, maximum-scale=5, user-scalable=yes">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=0.1, maximum-scale=5, user-scalable=yes">
 <script src="./support.js"></script>
 </head>
 <body>
@@ -853,8 +853,9 @@ class Component extends DCLogic {
 
   componentDidMount() {
     var self = this;
-    this.__telefonYenile = function () { self.forceUpdate(); };
+    this.__telefonYenile = function () { self.setState({ __hash: window.location.hash }); };
     window.addEventListener("hashchange", this.__telefonYenile);
+    window.addEventListener("popstate", this.__telefonYenile);
     this.__disDokun();
     (function () {
       const HARITA = [
@@ -3338,7 +3339,7 @@ stickerAl(anahtar) {
     var out = {};
     for (var k in v) {
       var a = v[k];
-      if (Array.isArray(a) && a.length > 1 && a[0] && typeof a[0] === "object" && typeof a[0].id === "string") {
+      if (Array.isArray(a) && a.length > 0 && a[0] && typeof a[0] === "object" && typeof a[0].id === "string" && a[0].id) {
         var bul = a.filter(function (p) { return p.id === hedef; });
         out[k] = bul.length ? bul : [];
       } else out[k] = a;

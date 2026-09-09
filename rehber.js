@@ -1,3 +1,4 @@
+(function(){if(window.matchMedia&&window.matchMedia("(max-width:520px)").matches)return;
 (function () {
   if (window.__rehberKurulu) return;
   window.__rehberKurulu = true;
@@ -515,4 +516,6 @@
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", kur);
   else kur();
+})();
+
 })();

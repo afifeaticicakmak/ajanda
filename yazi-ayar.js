@@ -1,3 +1,4 @@
+(function(){if(window.matchMedia&&window.matchMedia("(max-width:520px)").matches)return;
 (function () {
   if (window.__yaziAyarKurulu) return;
   window.__yaziAyarKurulu = true;
@@ -242,4 +243,6 @@
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", kur);
   else kur();
+})();
+
 })();

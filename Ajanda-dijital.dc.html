@@ -2611,7 +2611,7 @@ stickerAl(anahtar) {
           kutuGir: function () { self.setState({ hv: "kapak-kutu" }); },
           kutuCik: function () { self.setState({ hv: null }); },
           kutuBoyut: function (e) { self.kapakBoyut(e); },
-          kutuSifirla: function () { if (window.confirm("Kapak kutusu ilk boyutuna ve yerine dönsün mü?")) self.yaz("kapak-kutu", ""); },
+          kutuSifirla: function () { if (window.confirm("Kapak kutusu ilk boyutuna ve yerine dönsün mü?")) self.yaz("kapak-kutu", { x: 243, y: 546, w: 512, h: 286, s: kutu.s || null }); },
           kutuSekil: SEK.map(function (x) {
             const secili = (kutu.s || "") === x.k;
             return {

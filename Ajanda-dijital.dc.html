@@ -48,9 +48,9 @@ input::placeholder, textarea::placeholder { color:#cfccc9; }
       </sc-if>
     </span>
     <div style="position:absolute;left:{{ p.kx }};top:{{ p.ky }};width:{{ p.kw }};height:{{ p.kh }};background:#f3ece0;box-shadow:0 6px 26px rgba(32,30,29,0.22);padding:22px;box-sizing:border-box;border-radius:{{ p.kr }};z-index:5" onMouseEnter="{{ p.kutuGir }}" onMouseLeave="{{ p.kutuCik }}">
-      <span onMouseDown="{{ p.kutuTasi }}" title="kutuyu taşı" style="position:absolute;left:50%;top:-11px;transform:translateX(-50%);width:44px;height:16px;border-radius:9px;background:rgba(253,252,250,0.9);border:1px solid #cfc6b4;cursor:move;display:flex;align-items:center;justify-content:center;font:400 10px Lora,serif;color:#9c8f77;opacity:{{ p.kutuTut }};transition:opacity 0.12s">⠿</span>
-      <span onMouseDown="{{ p.kutuBoyut }}" title="boyutlandır" style="position:absolute;right:-9px;bottom:-9px;width:19px;height:19px;border-radius:50%;background:rgba(253,252,250,0.95);border:1px solid #cfc6b4;cursor:nwse-resize;display:flex;align-items:center;justify-content:center;font:400 11px Lora,serif;color:#9c8f77;opacity:{{ p.kutuTut }};transition:opacity 0.12s">⤢</span>
-      <span style="position:absolute;left:-2px;top:-30px;display:flex;gap:4px;opacity:{{ p.kutuTut }};transition:opacity 0.12s">
+      <span onMouseDown="{{ p.kutuTasi }}" onTouchStart="{{ p.kutuTasi }}" title="kutuyu taşı" style="position:absolute;left:50%;top:-11px;transform:translateX(-50%);width:44px;height:16px;border-radius:9px;background:rgba(253,252,250,0.9);border:1px solid #cfc6b4;touch-action:none;cursor:move;display:flex;align-items:center;justify-content:center;font:400 10px Lora,serif;color:#9c8f77">⠿</span>
+      <span onMouseDown="{{ p.kutuBoyut }}" onTouchStart="{{ p.kutuBoyut }}" title="boyutlandır" style="position:absolute;right:-9px;bottom:-9px;width:19px;height:19px;border-radius:50%;background:rgba(253,252,250,0.95);border:1px solid #cfc6b4;touch-action:none;cursor:nwse-resize;display:flex;align-items:center;justify-content:center;font:400 11px Lora,serif;color:#9c8f77">⤢</span>
+      <span style="position:absolute;left:-2px;top:-30px;display:flex;gap:4px">
         <sc-for list="{{ p.kutuSekil }}" as="ks" hint-placeholder-count="4">
           <span onClick="{{ ks.sec }}" title="{{ ks.ad }}" style="padding:2px 9px;border:1px solid {{ ks.kenar }};border-radius:9px;background:rgba(253,252,250,0.85);font:400 9px Lora,serif;color:{{ ks.fg }};cursor:pointer">{{ ks.ad }}</span>
         </sc-for>
@@ -1238,7 +1238,7 @@ stickerAl(anahtar) {
 
   imgEl(src, stil) {
     if (!src) return null;
-    return React.createElement("img", { src: src, alt: "", style: Object.assign({ display: "block" }, stil || {}) });
+    return React.createElement("img", { src: src, alt: "", loading: "lazy", decoding: "async", style: Object.assign({ display: "block" }, stil || {}) });
   }
 
   kapakTasi(e) {
@@ -2600,7 +2600,7 @@ stickerAl(anahtar) {
         const kutu = self.al("kapak-kutu") || {};
         const sk = SEK.find(function (x) { return x.k === (kutu.s || ""); }) || SEK[0];
         return {
-          kx: (typeof kutu.x === "number" ? kutu.x : 243) + "px",
+          kx: (typeof kutu.x === "number" ? kutu.x : 264) + "px",
           ky: (typeof kutu.y === "number" ? kutu.y : 546) + "px",
           kw: (typeof kutu.w === "number" ? kutu.w : 512) + "px",
           kh: (typeof kutu.h === "number" ? kutu.h : 286) + "px",

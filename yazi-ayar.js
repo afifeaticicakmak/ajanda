@@ -49,7 +49,7 @@
       var el = alan[i];
       if (el.closest("#__yazi-ayar-kok")) continue;
       var ozgun = (el.getAttribute("style") || "");
-      if (/font-size/i.test(ozgun) && !alanlar[anahtar(el)]) {
+      if (/(^|;)\s*font\s*:|font-size/i.test(ozgun) && !alanlar[anahtar(el)]) {
         el.style.removeProperty("font-family");
         el.style.removeProperty("font-size");
         continue;

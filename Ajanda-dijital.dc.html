@@ -852,15 +852,9 @@ class Component extends DCLogic {
   state = { d: (function () { try { return JSON.parse(window.localStorage.getItem("ajanda-v3") || "{}"); } catch (e) { return {}; } })(), yuk: true };
 
   componentDidMount() {
-    try {
-      if (!window.localStorage.getItem("kapak-kutu-sifir-1")) {
-        window.localStorage.setItem("kapak-kutu-sifir-1", "1");
-        const kk = (this.state.d || {})["kapak-kutu"];
-        if (kk && typeof kk === "object") {
-          this.yaz("kapak-kutu", { x: 243, y: 546, w: 512, h: 286, s: kk.s || null });
-        }
-      }
-    } catch (e) {}
+    var self = this;
+    this.__telefonYenile = function () { self.forceUpdate(); };
+    window.addEventListener("hashchange", this.__telefonYenile);
     this.__disDokun();
     (function () {
       const HARITA = [
@@ -3002,7 +2996,7 @@ stickerAl(anahtar) {
     if (typeof haftalar !== "undefined") __zemDekor(haftalar);
     if (typeof gunler !== "undefined") __zemDekor(gunler);
 
-    return {
+    const __cikti = {
       rToc: R("toc"), rKapak: R("kapak"), rBugun: R("bugun"), rRehber: R("rehber"),
       rOgrenciler: R("ogrenciler"), rKisiler: R("kisiler"), rDefter: R("defter"),
       yedekAl: () => this.yedekAl(),
@@ -3333,6 +3327,26 @@ stickerAl(anahtar) {
       toplamBirikim: bicim(toplamBirikim), birikimYolu,
       toplamHarcama: bicim(toplamHarcama), harcamaYolu
     };
+    return this.__telefonSuz(__cikti);
+  }
+
+  __telefonSuz(v) {
+    var dar = false;
+    try { dar = window.matchMedia && window.matchMedia("(max-width:520px)").matches; } catch (e) {}
+    if (!dar) return v;
+    var hedef = (window.location.hash || "").replace(/^#/, "") || "kapak";
+    var out = {};
+    for (var k in v) {
+      var a = v[k];
+      if (Array.isArray(a) && a.length > 1 && a[0] && typeof a[0] === "object" && typeof a[0].id === "string") {
+        var bul = a.filter(function (p) { return p.id === hedef; });
+        out[k] = bul.length ? bul : [];
+      } else out[k] = a;
+    }
+    var toplam = 0;
+    for (var k2 in out) if (Array.isArray(out[k2])) toplam += out[k2].length;
+    if (!toplam) { out.kapakSayfa = v.kapakSayfa; }
+    return out;
   }
 }
 </script>

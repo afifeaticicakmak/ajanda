@@ -48,12 +48,13 @@ input::placeholder, textarea::placeholder { color:#cfccc9; }
       </sc-if>
     </span>
     <div style="position:absolute;left:{{ p.kx }};top:{{ p.ky }};width:{{ p.kw }};height:{{ p.kh }};background:#f3ece0;box-shadow:0 6px 26px rgba(32,30,29,0.22);padding:22px;box-sizing:border-box;border-radius:{{ p.kr }};z-index:5" onMouseEnter="{{ p.kutuGir }}" onMouseLeave="{{ p.kutuCik }}">
-      <span onMouseDown="{{ p.kutuTasi }}" onTouchStart="{{ p.kutuTasi }}" title="kutuyu taşı" style="position:absolute;left:50%;top:-11px;transform:translateX(-50%);width:44px;height:16px;border-radius:9px;background:rgba(253,252,250,0.9);border:1px solid #cfc6b4;touch-action:none;cursor:move;display:flex;align-items:center;justify-content:center;font:400 10px Lora,serif;color:#9c8f77">⠿</span>
-      <span onMouseDown="{{ p.kutuBoyut }}" onTouchStart="{{ p.kutuBoyut }}" title="boyutlandır" style="position:absolute;right:-9px;bottom:-9px;width:19px;height:19px;border-radius:50%;background:rgba(253,252,250,0.95);border:1px solid #cfc6b4;touch-action:none;cursor:nwse-resize;display:flex;align-items:center;justify-content:center;font:400 11px Lora,serif;color:#9c8f77">⤢</span>
-      <span style="position:absolute;left:-2px;top:-30px;display:flex;gap:4px">
+      <span onMouseDown="{{ p.kutuTasi }}" onTouchStart="{{ p.kutuTasi }}" title="kutuyu taşı" style="position:absolute;left:50%;top:-11px;transform:translateX(-50%);width:44px;height:16px;border-radius:9px;background:rgba(253,252,250,0.9);border:1px solid #cfc6b4;touch-action:none;cursor:move;display:flex;align-items:center;justify-content:center;font:400 10px Lora,serif;color:#9c8f77;opacity:{{ p.kutuTut }};transition:opacity 0.12s">⠿</span>
+      <span onMouseDown="{{ p.kutuBoyut }}" onTouchStart="{{ p.kutuBoyut }}" title="boyutlandır" style="position:absolute;right:-9px;bottom:-9px;width:19px;height:19px;border-radius:50%;background:rgba(253,252,250,0.95);border:1px solid #cfc6b4;touch-action:none;cursor:nwse-resize;display:flex;align-items:center;justify-content:center;font:400 11px Lora,serif;color:#9c8f77;opacity:{{ p.kutuTut }};transition:opacity 0.12s">⤢</span>
+      <span style="position:absolute;left:-2px;top:-30px;display:flex;gap:4px;opacity:{{ p.kutuTut }};transition:opacity 0.12s">
         <sc-for list="{{ p.kutuSekil }}" as="ks" hint-placeholder-count="4">
           <span onClick="{{ ks.sec }}" title="{{ ks.ad }}" style="padding:2px 9px;border:1px solid {{ ks.kenar }};border-radius:9px;background:rgba(253,252,250,0.85);font:400 9px Lora,serif;color:{{ ks.fg }};cursor:pointer">{{ ks.ad }}</span>
         </sc-for>
+        <span onClick="{{ p.kutuSifirla }}" title="kutuyu ilk hâline döndür" style="padding:2px 9px;border:1px solid #d6cfc0;border-radius:9px;background:rgba(253,252,250,0.85);font:400 9px Lora,serif;color:#a9a6a3;cursor:pointer">sıfırla</span>
       </span>
       <div style="box-sizing:border-box;height:100%;border:1px solid #9c8f77;border-radius:{{ p.kri }};padding:26px 28px;display:flex;flex-direction:column;gap:10px">
         <input type="text" defaultValue="{{ p.baslik.d }}" onBlur="{{ p.baslik.b }}" placeholder="senin hikâyenin başlığı ne?" style="width:100%;box-sizing:border-box;border:none;background:transparent;font:400 15px Lora,serif;color:#201e1d;outline:none;padding:0 6px;font-size:30px;text-align:center;color:#3a3128;padding:0">
@@ -2600,7 +2601,7 @@ stickerAl(anahtar) {
         const kutu = self.al("kapak-kutu") || {};
         const sk = SEK.find(function (x) { return x.k === (kutu.s || ""); }) || SEK[0];
         return {
-          kx: (typeof kutu.x === "number" ? kutu.x : 264) + "px",
+          kx: (typeof kutu.x === "number" ? kutu.x : 243) + "px",
           ky: (typeof kutu.y === "number" ? kutu.y : 546) + "px",
           kw: (typeof kutu.w === "number" ? kutu.w : 512) + "px",
           kh: (typeof kutu.h === "number" ? kutu.h : 286) + "px",
@@ -2610,6 +2611,7 @@ stickerAl(anahtar) {
           kutuGir: function () { self.setState({ hv: "kapak-kutu" }); },
           kutuCik: function () { self.setState({ hv: null }); },
           kutuBoyut: function (e) { self.kapakBoyut(e); },
+          kutuSifirla: function () { if (window.confirm("Kapak kutusu ilk boyutuna ve yerine dönsün mü?")) self.yaz("kapak-kutu", ""); },
           kutuSekil: SEK.map(function (x) {
             const secili = (kutu.s || "") === x.k;
             return {

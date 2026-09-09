@@ -43,7 +43,14 @@
   }
 
   var bekle = null;
+  function bosAyar() {
+    if (genel.p !== 14 || genel.t !== "lora") return false;
+    for (var k in alanlar) if (Object.prototype.hasOwnProperty.call(alanlar, k)) return false;
+    return true;
+  }
+
   function uygulaHepsi() {
+    if (bosAyar()) { panelYenile(); return; }
     var alan = document.querySelectorAll(SEC);
     for (var i = 0; i < alan.length; i++) {
       var el = alan[i];

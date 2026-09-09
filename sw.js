@@ -1,6 +1,6 @@
 /* Çevrimdışı çalışması için: her açılan sayfa ve görsel önbelleğe alınır,
    sonraki açılışlarda internet olmasa da gelir. */
-const KOVA = "ajanda-v6";
+const KOVA = "ajanda-v7";
 
 self.addEventListener("install", (e) => {
   self.skipWaiting();
@@ -36,6 +36,10 @@ self.addEventListener("fetch", (e) => {
         }
         return y;
       })
-      .catch(() => caches.match(e.request).then((v) => v || caches.match("./Ajanda-dijital.dc.html")))
+      .catch(() => caches.match(e.request).then((v) => {
+        if (v) return v;
+        if (e.request.mode === "navigate") return caches.match("./Ajanda-dijital.dc.html");
+        return new Response("", { status: 504, statusText: "cevrimdisi" });
+      }))
   );
 });

@@ -35,20 +35,22 @@ input::placeholder, textarea::placeholder { color:#cfccc9; }
 <link rel="mask-icon" href="./ikon2-192.png" color="#8a7526" />
 <script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("./sw.js").catch(function(){});});}</script>
 <script src="./ajanda-bulut.js?v=3"></script>
+<script src="./yazi-ayar.js?v=2"></script>
+<script src="./rehber.js?v=10"></script>
 </helmet>
 
-<doc-page width="1040px" height="1387px" style="font-family:Lora,serif;color:#201e1d"><sc-for list="{{ gunler }}" as="p" hint-placeholder-count="31"><section class="page" id="{{ p.id }}" style="position:relative;background:#fdfcfa;overflow:hidden">
+<doc-page width="1040px" height="1387px" style="font-family:Lora,serif;color:#201e1d"><sc-for list="{{ gunler }}" as="p" hint-placeholder-count="31"><section class="page" id="{{ p.id }}" style="position:relative;background:{{ p.zemin.bg }};overflow:hidden">
     <sc-for list="{{ p.fotolar }}" as="f" hint-placeholder-count="0">
       <span style="position:absolute;left:{{ f.sol }};top:{{ f.ust }};width:{{ f.en }};z-index:{{ f.z }};cursor:move;touch-action:none;transform:{{ f.aci }};transform-origin:50% 50%" data-sticker="1" onMouseDown="{{ f.bas }}" onTouchStart="{{ f.dokunBas }}" onMouseEnter="{{ f.gir }}" onMouseLeave="{{ f.cik }}">
         <span style="display:block">{{ f.gorsel }}</span>
-        <span onClick="{{ f.sil }}" style="position:absolute;right:-9px;top:-9px;touch-action:none;width:20px;height:20px;border-radius:50%;background:#fdfcfa;border:1px solid #cfccc9;display:flex;align-items:center;justify-content:center;font:400 13px Lora,serif;color:#8d8a87;cursor:pointer;opacity:{{ f.tut }};transition:opacity 0.12s">×</span><span onMouseDown="{{ f.boyut }}" onTouchStart="{{ f.boyut }}" style="position:absolute;right:-8px;bottom:-8px;touch-action:none;width:18px;height:18px;border-radius:50%;background:#fdfcfa;border:1px solid #cfccc9;display:flex;align-items:center;justify-content:center;font:400 11px Lora,serif;color:#8d8a87;cursor:nwse-resize;opacity:{{ f.tut }};transition:opacity 0.12s">⤢</span><span onMouseDown="{{ f.don }}" onTouchStart="{{ f.don }}" style="position:absolute;left:-8px;bottom:-8px;touch-action:none;width:18px;height:18px;border-radius:50%;background:#fdfcfa;border:1px solid #cfccc9;display:flex;align-items:center;justify-content:center;font:400 11px Lora,serif;color:#8d8a87;cursor:grab;opacity:{{ f.tut }};transition:opacity 0.12s">↻</span>
+        <span onClick="{{ f.sil }}" onTouchStart="{{ f.dokunSil }}" style="position:absolute;right:-9px;top:-9px;touch-action:none;width:20px;height:20px;border-radius:50%;background:#fdfcfa;border:1px solid #cfccc9;display:flex;align-items:center;justify-content:center;font:400 13px Lora,serif;color:#8d8a87;cursor:pointer;opacity:{{ f.tut }};transition:opacity 0.12s">×</span><span onMouseDown="{{ f.boyut }}" onTouchStart="{{ f.boyut }}" style="position:absolute;right:-8px;bottom:-8px;touch-action:none;width:18px;height:18px;border-radius:50%;background:#fdfcfa;border:1px solid #cfccc9;display:flex;align-items:center;justify-content:center;font:400 11px Lora,serif;color:#8d8a87;cursor:nwse-resize;opacity:{{ f.tut }};transition:opacity 0.12s">⤢</span><span onMouseDown="{{ f.don }}" onTouchStart="{{ f.don }}" style="position:absolute;left:-8px;bottom:-8px;touch-action:none;width:18px;height:18px;border-radius:50%;background:#fdfcfa;border:1px solid #cfccc9;display:flex;align-items:center;justify-content:center;font:400 11px Lora,serif;color:#8d8a87;cursor:grab;opacity:{{ f.tut }};transition:opacity 0.12s">↻</span><span onClick="{{ f.kirp }}" title="düzenle" style="position:absolute;left:-8px;top:-8px;touch-action:none;width:18px;height:18px;border-radius:50%;background:#fdfcfa;border:1px solid #cfccc9;display:flex;align-items:center;justify-content:center;font:400 10px Lora,serif;color:#8d8a87;cursor:pointer;opacity:{{ f.tut }};transition:opacity 0.12s">✎</span>
       </span>
     </sc-for>
-    <span style="position:absolute;right:14px;top:86px;z-index:6;display:flex;gap:6px"><span onClick="{{ p.stickerEkle }}" style="padding:4px 11px;border:1px solid #e0cdbd;border-radius:12px;background:#fdfcfa;font:400 11px Lora,serif;letter-spacing:0.06em;color:#c4885b;cursor:pointer">＋ STICKER</span><span onClick="{{ p.fotoEkle }}" style="padding:4px 11px;border:1px solid #cfccc9;border-radius:12px;background:#fdfcfa;font:400 11px Lora,serif;letter-spacing:0.06em;color:#8d8a87;cursor:pointer">＋ FOTOĞRAF</span></span>
+    <span style="position:absolute;right:14px;top:86px;z-index:6;display:flex;gap:6px"><span onClick="{{ p.stickerEkle }}" style="padding:4px 11px;border:1px solid #e0cdbd;border-radius:12px;background:#fdfcfa;font:400 11px Lora,serif;letter-spacing:0.06em;color:#c4885b;cursor:pointer">＋ STICKER</span><span onClick="{{ p.fotoEkle }}" style="padding:4px 11px;border:1px solid #cfccc9;border-radius:12px;background:#fdfcfa;font:400 11px Lora,serif;letter-spacing:0.06em;color:#8d8a87;cursor:pointer">＋ FOTOĞRAF</span><span onClick="{{ p.zemin.t }}" title="sayfa rengi" style="width:24px;height:24px;flex:none;border:1px solid #cfccc9;border-radius:12px;background:{{ p.zemin.nokta }};cursor:pointer;display:block"></span></span>
 
     <div style="position:absolute;left:0;right:0;top:0;height:74px;display:flex;align-items:stretch;background:#faf8f5;border-bottom:1px solid #e6e2df">
       <sc-for list="{{ sekGun }}" as="s" hint-placeholder-count="8">
-        <a href="{{ s.href }}" style="flex:1;position:relative;overflow:hidden;background:{{ s.renk }};border:2px solid #fdfcfa;box-shadow:{{ s.ic }};opacity:{{ s.op }}"><span style="position:absolute;inset:0;background-image:url({{ s.mg }});background-size:cover;background-position:50% 50%;opacity:0.62;mix-blend-mode:multiply"></span><span style="position:absolute;inset:0;background:{{ s.renk }};opacity:0.3"></span></a>
+        <a href="{{ s.href }}" style="flex:1;position:relative;overflow:hidden;background:{{ s.renk }};border:2px solid #fdfcfa;box-shadow:{{ s.ic }};opacity:{{ s.op }}"><span style="position:absolute;inset:0;overflow:hidden;opacity:0.62;mix-blend-mode:multiply">{{ s.mgEl }}</span><span style="position:absolute;inset:0;background:{{ s.renk }};opacity:0.3"></span></a>
       </sc-for>
     </div>
     <div style="position:absolute;left:0;top:74px;bottom:62px;width:76px;background:#f6f4f1;border-right:1px solid #e6e2df;display:flex;flex-direction:column">
@@ -77,17 +79,33 @@ input::placeholder, textarea::placeholder { color:#cfccc9; }
       </div>
       <div style="flex:1;display:flex;gap:20px;min-height:0">
         <div style="flex:1.02;display:flex;flex-direction:column;min-height:0">
-          <div style="font:400 11px Lora,serif;letter-spacing:0.14em;color:#8d8a87;padding-bottom:5px">SAAT ŞERİDİ</div>
-          <div style="flex:1;display:flex;flex-direction:column;border-top:1px solid #cfccc9;min-height:0">
-            <sc-for list="{{ p.saatler }}" as="h" hint-placeholder-count="18">
-              <div style="flex:1;display:flex;align-items:stretch;border-bottom:{{ h.cizgi }};min-height:0">
-                <span style="width:34px;flex:none;display:flex;align-items:center;font:400 12px Lora,serif;color:#a9a6a3">{{ h.et }}</span>
-                <span style="flex:1;min-width:0">
-                  <input type="text" defaultValue="{{ h.yz.d }}" onBlur="{{ h.yz.b }}" style="width:100%;height:100%;box-sizing:border-box;border:none;background:transparent;font:400 14px Lora,serif;color:#201e1d;outline:none;padding:0 8px" />
-                </span>
-              </div>
-            </sc-for>
+          <div style="display:flex;align-items:baseline;justify-content:space-between;padding-bottom:5px">
+            <span style="font:400 11px Lora,serif;letter-spacing:0.14em;color:#8d8a87">{{ p.seritBaslik }}</span>
+            <span onClick="{{ p.seritDegis }}" style="font:400 11px Lora,serif;color:#8fae9b;cursor:pointer">{{ p.seritDegisAd }}</span>
           </div>
+          <sc-if value="{{ p.saatMod }}" hint-placeholder-val="{{ true }}">
+            <div style="flex:1;display:flex;flex-direction:column;border-top:1px solid #cfccc9;min-height:0">
+              <sc-for list="{{ p.saatler }}" as="h" hint-placeholder-count="18">
+                <div style="flex:1;display:flex;align-items:stretch;border-bottom:{{ h.cizgi }};min-height:0;background:{{ h.renk.bg }}">
+                  <span style="width:44px;flex:none;display:flex;align-items:center;gap:2px">
+                    <span style="font:400 {{ h.punto }} Lora,serif;color:#a9a6a3">{{ h.et }}</span>
+                    <span onClick="{{ h.bucuk.t }}" title="{{ h.bucuk.ad }}" style="font:400 10px Lora,serif;color:{{ h.bucuk.renk }};cursor:pointer;padding:0 2px">{{ h.bucuk.im }}</span>
+                  </span>
+                  <span style="flex:1;min-width:0">
+                    <input type="text" defaultValue="{{ h.yz.d }}" onBlur="{{ h.yz.b }}" style="width:100%;height:100%;box-sizing:border-box;border:none;background:transparent;font:400 14px Lora,serif;color:#201e1d;outline:none;padding:0 8px" />
+                  </span>
+                  <span onClick="{{ h.renk.t }}" style="width:15px;flex:none;display:flex;align-items:center;justify-content:center;cursor:pointer">
+                    <span style="width:9px;height:9px;border-radius:50%;border:1px solid #ded9d4;background:{{ h.renk.nokta }}"></span>
+                  </span>
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+          <sc-if value="{{ p.serbestMod }}" hint-placeholder-val="">
+            <div style="flex:1;display:flex;flex-direction:column;border-top:1px solid #cfccc9;min-height:0;padding-top:8px">
+              <textarea defaultValue="{{ p.serbest.d }}" onBlur="{{ p.serbest.b }}" placeholder="bugünü yaz…" style="flex:1;width:100%;box-sizing:border-box;border:none;background-color:transparent;-webkit-appearance:none;appearance:none;background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 27px,#f0edea 27px,#f0edea 28px);background-attachment:local;font:400 15px/28px Lora,serif;color:#201e1d;outline:none;padding:0 4px;resize:none;min-height:0"></textarea>
+            </div>
+          </sc-if>
         </div>
         <div style="flex:1;display:flex;flex-direction:column;gap:11px;min-height:0">
           <div style="flex:none">
@@ -99,7 +117,8 @@ input::placeholder, textarea::placeholder { color:#cfccc9; }
                 <span style="width:44px;flex:none;text-align:center;font:400 9px Lora,serif;letter-spacing:0.06em;color:#c4c1be">GER.</span>
               </div>
               <sc-for list="{{ p.oncelik }}" as="i" hint-placeholder-count="3">
-                <span style="display:flex;align-items:center;gap:8px">
+                <span style="display:flex;align-items:center;gap:8px;background:{{ i.renk.bg }}">
+                  <span onClick="{{ i.renk.t }}" style="width:11px;flex:none;display:flex;align-items:center;cursor:pointer"><span style="width:9px;height:9px;border-radius:50%;border:1px solid #ded9d4;background:{{ i.renk.nokta }}"></span></span>
                   <span onClick="{{ i.kutu.t }}" style="width:17px;height:17px;flex:none;box-sizing:border-box;border:1px solid #8fae9b;border-radius:3px;background:{{ i.kutu.bg }};cursor:pointer"></span>
                   <input type="text" defaultValue="{{ i.ad.d }}" onBlur="{{ i.ad.b }}" style="width:100%;box-sizing:border-box;border:none;background:transparent;font:400 15px Lora,serif;color:#201e1d;outline:none;padding:0 6px;flex:1;border-bottom:1px solid #e6e2df;height:25px;font-size:14px" />
                   <input type="text" defaultValue="{{ i.tah.d }}" onBlur="{{ i.tah.b }}" style="width:100%;box-sizing:border-box;border:none;background:transparent;font:400 15px Lora,serif;color:#201e1d;outline:none;padding:0 6px;width:44px;flex:none;text-align:center;border-bottom:1px solid #e6e2df;height:25px;font-size:13px" />
@@ -124,9 +143,10 @@ input::placeholder, textarea::placeholder { color:#cfccc9; }
               <div style="font:400 11px Lora,serif;letter-spacing:0.14em;color:#7d9ea3;padding-bottom:5px">YÜKSEK ENERJİ</div>
               <div style="flex:1;display:flex;flex-direction:column;min-height:0">
                 <sc-for list="{{ p.yuksek }}" as="r" hint-placeholder-count="4">
-                  <span style="flex:1;min-height:0;display:flex;align-items:center;gap:6px;border-bottom:1px solid #ebe7e4">
+                  <span style="flex:1;min-height:0;display:flex;align-items:center;gap:6px;border-bottom:1px solid #ebe7e4;background:{{ r.renk.bg }}">
                     <span onClick="{{ r.kutu.t }}" style="width:14px;height:14px;flex:none;box-sizing:border-box;border:1px solid #7d9ea3;border-radius:3px;background:{{ r.kutu.bg }};cursor:pointer"></span>
                     <input type="text" id="{{ r.yz.id }}" defaultValue="{{ r.yz.d }}" onBlur="{{ r.yz.b }}" style="width:100%;box-sizing:border-box;border:none;background:transparent;font:400 15px Lora,serif;color:#201e1d;outline:none;padding:0 6px;flex:1;font-size:13px;text-decoration:{{ r.ertele.cizgi }};color:{{ r.ertele.renk }}" />
+                    <span onClick="{{ r.renk.t }}" style="flex:none;display:flex;align-items:center;padding:0 2px;cursor:pointer"><span style="width:9px;height:9px;border-radius:50%;border:1px solid #ded9d4;background:{{ r.renk.nokta }}"></span></span>
                     <span onClick="{{ r.ertele.t }}" title="ertele — yarına taşı" style="flex:none;display:flex;gap:3px;padding:4px 3px;cursor:pointer">
                       <sc-for list="{{ r.ertele.nokta }}" as="n" hint-placeholder-count="3">
                         <span style="width:8px;height:8px;border-radius:50%;border:1px solid #c99a9b;background:{{ n.bg }}"></span>
@@ -140,9 +160,10 @@ input::placeholder, textarea::placeholder { color:#cfccc9; }
               <div style="font:400 11px Lora,serif;letter-spacing:0.14em;color:#a9a6a3;padding-bottom:5px">DÜŞÜK ENERJİ</div>
               <div style="flex:1;display:flex;flex-direction:column;min-height:0">
                 <sc-for list="{{ p.dusuk }}" as="r" hint-placeholder-count="4">
-                  <span style="flex:1;min-height:0;display:flex;align-items:center;gap:6px;border-bottom:1px solid #ebe7e4">
+                  <span style="flex:1;min-height:0;display:flex;align-items:center;gap:6px;border-bottom:1px solid #ebe7e4;background:{{ r.renk.bg }}">
                     <span onClick="{{ r.kutu.t }}" style="width:14px;height:14px;flex:none;box-sizing:border-box;border:1px solid #a9a6a3;border-radius:3px;background:{{ r.kutu.bg }};cursor:pointer"></span>
                     <input type="text" id="{{ r.yz.id }}" defaultValue="{{ r.yz.d }}" onBlur="{{ r.yz.b }}" style="width:100%;box-sizing:border-box;border:none;background:transparent;font:400 15px Lora,serif;color:#201e1d;outline:none;padding:0 6px;flex:1;font-size:13px;text-decoration:{{ r.ertele.cizgi }};color:{{ r.ertele.renk }}" />
+                    <span onClick="{{ r.renk.t }}" style="flex:none;display:flex;align-items:center;padding:0 2px;cursor:pointer"><span style="width:9px;height:9px;border-radius:50%;border:1px solid #ded9d4;background:{{ r.renk.nokta }}"></span></span>
                     <span onClick="{{ r.ertele.t }}" title="ertele — yarına taşı" style="flex:none;display:flex;gap:3px;padding:4px 3px;cursor:pointer">
                       <sc-for list="{{ r.ertele.nokta }}" as="n" hint-placeholder-count="3">
                         <span style="width:8px;height:8px;border-radius:50%;border:1px solid #c99a9b;background:{{ n.bg }}"></span>
@@ -171,21 +192,58 @@ input::placeholder, textarea::placeholder { color:#cfccc9; }
               </div>
             </div>
           </div>
+          <div style="flex:none;display:flex;align-items:flex-end;gap:12px">
+            <div style="flex:none">
+              <div style="font:400 11px Lora,serif;letter-spacing:0.14em;color:#8d8a87;padding-bottom:5px">UYKU</div>
+              <div style="display:flex;align-items:baseline;gap:7px">
+                <input type="text" defaultValue="{{ p.yatti.d }}" onBlur="{{ p.yatti.b }}" placeholder="23:30" style="box-sizing:border-box;border:none;background:transparent;font:400 14px Lora,serif;color:#201e1d;outline:none;text-align:center;border-bottom:1px solid #ebe7e4;width:52px" />
+                <span style="font:400 12px Lora,serif;color:#c4c1be">yattım</span>
+                <input type="text" defaultValue="{{ p.uyandi.d }}" onBlur="{{ p.uyandi.b }}" placeholder="07:00" style="box-sizing:border-box;border:none;background:transparent;font:400 14px Lora,serif;color:#201e1d;outline:none;text-align:center;border-bottom:1px solid #ebe7e4;width:52px" />
+                <span style="font:400 12px Lora,serif;color:#c4c1be">kalktım</span>
+              </div>
+            </div>
+            <div style="flex:1;display:flex;align-items:center;gap:8px;padding-bottom:3px">
+              <span style="flex:1;height:7px;border-radius:4px;background:#f0edea;overflow:hidden;display:block">
+                <span style="display:block;height:7px;width:{{ p.uykuOran }};background:#9ab7b0"></span>
+              </span>
+              <span style="font:400 13px Lora,serif;color:{{ p.uykuRenk }};white-space:nowrap">{{ p.uykuMetin }}</span>
+            </div>
+          </div>
           <div style="flex:none">
-            <div style="font:400 11px Lora,serif;letter-spacing:0.14em;color:#8d8a87;padding-bottom:5px">ALIŞKANLIK</div>
+            <div style="display:flex;align-items:baseline;justify-content:space-between;padding-bottom:5px">
+              <span style="font:400 11px Lora,serif;letter-spacing:0.14em;color:#8d8a87">ALIŞKANLIK</span>
+              <span style="display:flex;align-items:center;gap:5px">
+                <span onClick="{{ p.alisEkle }}" title="alışkanlık seç" style="width:15px;height:15px;border-radius:50%;border:1px solid #dcc3c4;display:flex;align-items:center;justify-content:center;font:400 10px Lora,serif;color:#b3888a;cursor:pointer">＋</span>
+              </span>
+            </div>
             <div style="display:flex;flex-direction:column;gap:6px">
-              <sc-for list="{{ p.aliskanlik }}" as="r" hint-placeholder-count="4">
+              <sc-if value="{{ p.alisBos }}" hint-placeholder-val="">
+                <span style="font:400 12px Lora,serif;color:#c4c1be">{{ p.alisNot }}</span>
+              </sc-if>
+              <sc-for list="{{ p.aliskanlik }}" as="r" hint-placeholder-count="3">
                 <span style="display:flex;align-items:center;gap:9px">
                   <span onClick="{{ r.kutu.t }}" style="width:16px;height:16px;flex:none;box-sizing:border-box;border:1px solid #c99a9b;border-radius:3px;background:{{ r.kutu.bg }};cursor:pointer"></span>
                   <span style="flex:1;font:400 14px Lora,serif;color:{{ r.renk }};border-bottom:1px solid #f0edea;padding:0 6px 2px">{{ r.ad }}</span>
+                  <input type="text" defaultValue="{{ r.miktar.d }}" onBlur="{{ r.miktar.b }}" placeholder="—" style="width:56px;flex:none;box-sizing:border-box;border:none;border-bottom:1px solid #f0edea;background:transparent;font:400 12px Lora,serif;color:#8d8a87;outline:none;text-align:center;padding:0 2px 2px" />
+                  <span onClick="{{ r.sil }}" title="kaldır" style="flex:none;font:400 12px Lora,serif;color:#dcd8d4;cursor:pointer">×</span>
                 </span>
               </sc-for>
             </div>
           </div>
           <div style="flex:0.9;display:flex;flex-direction:column;min-height:0">
             <div style="font:400 11px Lora,serif;letter-spacing:0.14em;color:#8d8a87;padding-bottom:5px">NOT</div>
-            <textarea defaultValue="{{ p.not.d }}" onBlur="{{ p.not.b }}" style="width:100%;height:100%;box-sizing:border-box;border:none;background:transparent;font:400 15px/1.5 Lora,serif;color:#201e1d;outline:none;padding:8px 10px;resize:none;flex:1;border:1px solid #e6e2df;border-radius:5px;background:#fbfaf8;min-height:0"></textarea>
+            <textarea defaultValue="{{ p.not.d }}" onBlur="{{ p.not.b }}" style="width:100%;height:100%;box-sizing:border-box;border:none;background:transparent;font:400 15px/1.5 Lora,serif;color:#201e1d;outline:none;padding:8px 10px;resize:none;flex:1;border:1px solid #e6e2df;border-radius:5px;background:transparent;min-height:0"></textarea>
           </div>
+          <sc-if value="{{ p.defterVar }}" hint-placeholder-val="">
+            <div style="flex:none;display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+              <span style="font:400 11px Lora,serif;letter-spacing:0.14em;color:#c4885b">DEFTER</span>
+              <sc-for list="{{ p.defterler }}" as="d" hint-placeholder-count="0">
+                <a href="{{ d.href }}" style="display:flex;align-items:center;gap:5px;padding:2px 9px;border:1px solid #f0e6dc;border-radius:11px;font:400 12px Lora,serif;color:#6b655c">
+                  <span style="width:7px;height:7px;border-radius:50%;background:{{ d.renk }}"></span>{{ d.ad }}
+                </a>
+              </sc-for>
+            </div>
+          </sc-if>
           <div style="flex:none;border-top:1px solid #cfccc9;padding-top:8px">
             <div style="font:400 11px Lora,serif;letter-spacing:0.14em;color:#8fae9b;padding-bottom:5px">BUGÜNÜN İYİ ANI</div>
             <input type="text" defaultValue="{{ p.iyiAn.d }}" onBlur="{{ p.iyiAn.b }}" style="width:100%;box-sizing:border-box;border:none;background:transparent;font:400 15px Lora,serif;color:#201e1d;outline:none;padding:0 6px;border-bottom:1px solid #ebe7e4;height:28px" />
@@ -207,6 +265,30 @@ class Component extends DCLogic {
 
   componentDidMount() {
     this.__disDokun();
+    (function () {
+      const HARITA = [
+        [/^(kapak|bugun|toc|rehber|kendime|icgoru)/, "Ajanda-dijital.dc.html"],
+        [/^(ayirici-|yil-|hatira-|a-|ardindan-)/, "Ajanda-dijital.dc.html"],
+        [/^(alis-|para-|bekleyenler-|soylediler-|netuttu-|sozler|ogrenciler|ogrenci-|zafer)/, "Ajanda-dijital-takip.dc.html"],
+        [/^(beyin|serbest|bosalt|zorgun|etiketler|sticker-)/, "Ajanda-dijital-notlar.dc.html"],
+        [/^(donem-|program-|enerji-)/, "Ajanda-dijital-donem.dc.html"]
+      ];
+      const BU = window.location.pathname.split("/").pop() || "Ajanda-dijital.dc.html";
+      document.addEventListener("click", function (e) {
+        const a = e.target.closest && e.target.closest('a[href^="#"]');
+        if (!a) return;
+        const id = decodeURIComponent(a.getAttribute("href").slice(1));
+        if (!id || document.getElementById(id)) return;
+        for (let k = 0; k < HARITA.length; k++) {
+          if (HARITA[k][0].test(id) && HARITA[k][1] !== BU) {
+            e.preventDefault();
+            window.location.href = HARITA[k][1] + "#" + id;
+            return;
+          }
+        }
+      }, true);
+    })();
+
     (function () {
       const bas = Date.now();
       const t = window.setInterval(function () {
@@ -284,18 +366,29 @@ class Component extends DCLogic {
     return {
       fotolar: dizi.map(function (f, i) {
         return {
-          gorsel: React.createElement("img", { src: f.src, alt: "", style: { display: "block", width: "100%", height: "auto" } }),
+          gorsel: React.createElement("img", { src: f.src, alt: "", style: {
+            display: "block", width: "100%", height: "auto",
+            clipPath: self.kirpYolu(f),
+            transform: f.m ? "scaleX(-1)" : "none",
+            opacity: typeof f.o === "number" ? f.o : 1
+          } }),
           sol: f.x + "px", ust: f.y + "px", en: f.w + "px",
           bas: function (e) { self.fotoSurukle(anahtar, i, e); },
           dokunBas: function (e) { self.setState({ hv: anahtar + "-" + i }); self.fotoSurukle(anahtar, i, e); },
           boyut: function (e) { self.fotoBoyut(anahtar, i, e); },
           don: function (e) { self.fotoDondur(anahtar, i, e); },
+          kirp: function () { self.fotoKirp(anahtar, i); },
           aci: "rotate(" + (f.a || 0) + "deg)",
           tut: self.state.hv === (anahtar + "-" + i) ? "1" : "0",
           z: self.state.hv === (anahtar + "-" + i) ? 60 : 5 + i,
           gir: function () { self.setState({ hv: anahtar + "-" + i }); },
           cik: function () { self.setState({ hv: null }); },
-          sil: function () { const a = (self.al(anahtar) || []).slice(); a.splice(i, 1); self.yaz(anahtar, a.length ? a : false); }
+          sil: function () { const a = (self.al(anahtar) || []).slice(); a.splice(i, 1); self.yaz(anahtar, a.length ? a : false); },
+          dokunSil: function (e) {
+            if (e.cancelable) e.preventDefault();
+            e.stopPropagation();
+            const a = (self.al(anahtar) || []).slice(); a.splice(i, 1); self.yaz(anahtar, a.length ? a : false);
+          }
         };
       }),
       fotoEkle: function () { self.fotoAl(anahtar); },
@@ -411,20 +504,9 @@ stickerAl(anahtar) {
   }
 
   stickerKoy(anahtar, src) {
-    const im = new Image();
-    const self = this;
-    im.onload = function () {
-      const en = Math.min(240, im.width);
-      const a = (self.al(anahtar) || []).slice();
-      a.push({ src: src, x: 120 + a.length * 18, y: 260 + a.length * 18, w: en });
-      self.yaz(anahtar, a);
-    };
-    im.onerror = function () {
-      const a = (self.al(anahtar) || []).slice();
-      a.push({ src: src, x: 140, y: 280, w: 200 });
-      self.yaz(anahtar, a);
-    };
-    im.src = src;
+    const a = (this.al(anahtar) || []).slice();
+    a.push({ src: src, x: 120 + a.length * 18, y: 260 + a.length * 18, w: 200 });
+    this.yaz(anahtar, a);
   }
 
   fotoAl(anahtar) {
@@ -470,6 +552,158 @@ stickerAl(anahtar) {
     }, function () { self.kaydet(self.state.d); });
   }
 
+  imgEl(src, stil) {
+    if (!src) return null;
+    return React.createElement("img", { src: src, alt: "", style: Object.assign({ display: "block" }, stil || {}) });
+  }
+
+  kirpYolu(f) {
+    const k = Array.isArray(f.k) ? f.k : [0, 0, 0, 0];
+    const u = k[0], sa = k[1], al = k[2], so = k[3];
+    const x0 = so, x1 = 100 - sa, y0 = u, y1 = 100 - al;
+    const P = (pts) => "polygon(" + pts.map(function (p) { return p[0].toFixed(2) + "% " + p[1].toFixed(2) + "%"; }).join(", ") + ")";
+    const w = x1 - x0, h = y1 - y0;
+    const c = (fx, fy) => [x0 + w * fx, y0 + h * fy];
+    switch (f.s) {
+      case "kose-su": return P([c(0.3, 0), c(1, 0), c(1, 1), c(0, 1), c(0, 0.3)]);
+      case "kose-sa": return P([c(0, 0), c(0.7, 0), c(1, 0.3), c(1, 1), c(0, 1)]);
+      case "kose-au": return P([c(0, 0), c(1, 0), c(1, 1), c(0.3, 1), c(0, 0.7)]);
+      case "capraz-sag": return P([c(0, 0), c(1, 0), c(1, 0.72), c(0, 1)]);
+      case "capraz-sol": return P([c(0, 0), c(1, 0), c(1, 1), c(0, 0.72)]);
+      case "elmas": return P([c(0.5, 0), c(1, 0.5), c(0.5, 1), c(0, 0.5)]);
+      case "egik": return P([c(0.14, 0), c(1, 0), c(0.86, 1), c(0, 1)]);
+      case "altigen": return P([c(0.25, 0), c(0.75, 0), c(1, 0.5), c(0.75, 1), c(0.25, 1), c(0, 0.5)]);
+      case "ucgen": return P([c(0.5, 0), c(1, 1), c(0, 1)]);
+      case "daire": return "ellipse(" + (w / 2).toFixed(2) + "% " + (h / 2).toFixed(2) + "% at " + (x0 + w / 2).toFixed(2) + "% " + (y0 + h / 2).toFixed(2) + "%)";
+      default: return (u || sa || al || so) ? "inset(" + u + "% " + sa + "% " + al + "% " + so + "%)" : "none";
+    }
+  }
+
+  fotoKirp(anahtar, i) {
+    const self = this;
+    const dz = (self.al(anahtar) || []).slice();
+    const b = dz[i];
+    if (!b) return;
+    const kirp = Array.isArray(b.k) ? b.k.slice() : [0, 0, 0, 0];
+    let ayna = !!b.m, saydam = typeof b.o === "number" ? b.o : 1;
+
+    const kap = document.createElement("div");
+    kap.setAttribute("style", "position:fixed;inset:0;z-index:2147483600;background:rgba(32,30,29,0.55);display:flex;align-items:center;justify-content:center;padding:24px");
+    const panel = document.createElement("div");
+    panel.setAttribute("style", "width:520px;max-width:94vw;max-height:92vh;overflow:auto;background:#fdfcfa;border-radius:12px;padding:22px 24px;font-family:Lora,serif;display:flex;flex-direction:column;gap:16px");
+    kap.appendChild(panel);
+
+    const bas = document.createElement("div");
+    bas.setAttribute("style", "display:flex;align-items:baseline;justify-content:space-between");
+    bas.innerHTML = '<span style="font:400 20px Lora,serif;color:#201e1d">Sticker\'ı düzenle</span>';
+    const kapat = document.createElement("span");
+    kapat.textContent = "×";
+    kapat.setAttribute("style", "font:400 22px Lora,serif;color:#a9a6a3;cursor:pointer;line-height:1");
+    kapat.onclick = function () { kap.remove(); };
+    bas.appendChild(kapat);
+    panel.appendChild(bas);
+
+    const sahne = document.createElement("div");
+    sahne.setAttribute("style", "height:230px;display:flex;align-items:center;justify-content:center;background:#f4f2ee;border-radius:8px;overflow:hidden;padding:10px");
+    const im = document.createElement("img");
+    im.src = b.src;
+    sahne.appendChild(im);
+    panel.appendChild(sahne);
+
+    let sekil = b.s || "";
+    const ciz = function () {
+      im.setAttribute("style", "max-width:100%;max-height:210px;display:block;clip-path:" + self.kirpYolu({ k: kirp, s: sekil }) + ";transform:scaleX(" + (ayna ? -1 : 1) + ");opacity:" + saydam);
+    };
+    ciz();
+
+    const SEKILLER = [
+      { k: "", ad: "düz" }, { k: "capraz-sag", ad: "çapraz ↘" }, { k: "capraz-sol", ad: "çapraz ↗" },
+      { k: "kose-su", ad: "köşe ↖" }, { k: "kose-sa", ad: "köşe ↗" }, { k: "kose-au", ad: "köşe ↙" },
+      { k: "egik", ad: "eğik" }, { k: "elmas", ad: "elmas" }, { k: "altigen", ad: "altıgen" },
+      { k: "ucgen", ad: "üçgen" }, { k: "daire", ad: "daire" }
+    ];
+    const sekKap = document.createElement("div");
+    sekKap.setAttribute("style", "display:flex;flex-wrap:wrap;gap:6px");
+    const sekDugme = [];
+    SEKILLER.forEach(function (sk) {
+      const d = document.createElement("span");
+      d.textContent = sk.ad;
+      d.onclick = function () { sekil = sk.k; sekDugme.forEach(function (x) { x.f(); }); ciz(); };
+      const yenile = function () {
+        const secili = sekil === sk.k;
+        d.setAttribute("style", "padding:5px 12px;border-radius:13px;font:400 12px Lora,serif;cursor:pointer;border:1px solid " + (secili ? "#c4885b" : "#e6e2df") + ";background:" + (secili ? "#f9efe4" : "#fdfcfa") + ";color:" + (secili ? "#8a4f22" : "#8d8a87"));
+      };
+      yenile();
+      sekDugme.push({ f: yenile });
+      sekKap.appendChild(d);
+    });
+    panel.appendChild(sekKap);
+
+    const ADLAR = ["üst", "sağ", "alt", "sol"];
+    ADLAR.forEach(function (ad, j) {
+      const sat = document.createElement("label");
+      sat.setAttribute("style", "display:flex;align-items:center;gap:12px;font:400 13px Lora,serif;color:#6b655c");
+      sat.innerHTML = '<span style="width:34px">' + ad + "</span>";
+      const r = document.createElement("input");
+      r.type = "range"; r.min = "0"; r.max = "45"; r.step = "1"; r.value = String(kirp[j]);
+      r.setAttribute("style", "flex:1;accent-color:#c4885b");
+      const no = document.createElement("span");
+      no.setAttribute("style", "width:34px;text-align:right;color:#a9a6a3");
+      no.textContent = kirp[j] + "%";
+      r.oninput = function () { kirp[j] = parseInt(r.value, 10); no.textContent = kirp[j] + "%"; ciz(); };
+      sat.appendChild(r); sat.appendChild(no);
+      panel.appendChild(sat);
+    });
+
+    const sat2 = document.createElement("label");
+    sat2.setAttribute("style", "display:flex;align-items:center;gap:12px;font:400 13px Lora,serif;color:#6b655c");
+    sat2.innerHTML = '<span style="width:34px">soluk</span>';
+    const rs = document.createElement("input");
+    rs.type = "range"; rs.min = "20"; rs.max = "100"; rs.step = "5"; rs.value = String(Math.round(saydam * 100));
+    rs.setAttribute("style", "flex:1;accent-color:#c4885b");
+    const nos = document.createElement("span");
+    nos.setAttribute("style", "width:34px;text-align:right;color:#a9a6a3");
+    nos.textContent = Math.round(saydam * 100) + "%";
+    rs.oninput = function () { saydam = parseInt(rs.value, 10) / 100; nos.textContent = rs.value + "%"; ciz(); };
+    sat2.appendChild(rs); sat2.appendChild(nos);
+    panel.appendChild(sat2);
+
+    const dugmeler = document.createElement("div");
+    dugmeler.setAttribute("style", "display:flex;gap:10px;flex-wrap:wrap;align-items:center");
+    const yap = function (ad, stil, tik) {
+      const d = document.createElement("span");
+      d.textContent = ad;
+      d.setAttribute("style", "padding:7px 16px;border-radius:15px;font:400 13px Lora,serif;cursor:pointer;" + stil);
+      d.onclick = tik;
+      dugmeler.appendChild(d);
+      return d;
+    };
+    yap("Aynala", "border:1px solid #e6e2df;color:#6b655c", function () { ayna = !ayna; ciz(); });
+    yap("Sıfırla", "border:1px solid #e6e2df;color:#6b655c", function () {
+      kirp[0] = kirp[1] = kirp[2] = kirp[3] = 0; ayna = false; saydam = 1; sekil = "";
+      sekDugme.forEach(function (x) { x.f(); });
+      panel.querySelectorAll('input[type="range"]').forEach(function (r, j) {
+        r.value = j < 4 ? "0" : "100";
+        r.dispatchEvent(new Event("input"));
+      });
+    });
+    const bosluk = document.createElement("span");
+    bosluk.setAttribute("style", "flex:1");
+    dugmeler.appendChild(bosluk);
+    yap("Kaydet", "border:1px solid #c4885b;background:#f9efe4;color:#8a4f22", function () {
+      const a = (self.al(anahtar) || []).slice();
+      if (!a[i]) { kap.remove(); return; }
+      const temiz = kirp.some(function (v) { return v > 0; });
+      a[i] = Object.assign({}, a[i], { k: temiz ? kirp : null, m: ayna || null, o: saydam < 1 ? saydam : null, s: sekil || null });
+      self.yaz(anahtar, a);
+      kap.remove();
+    });
+    panel.appendChild(dugmeler);
+
+    kap.onclick = function (e) { if (e.target === kap) kap.remove(); };
+    document.body.appendChild(kap);
+  }
+
   fotoBoyut(anahtar, i, e) {
     if (e.cancelable) e.preventDefault();
     e.stopPropagation();
@@ -496,6 +730,72 @@ stickerAl(anahtar) {
       const h = e.target.closest && e.target.closest("[data-sticker]");
       if (!h) self.setState({ hv: null });
     }, true);
+  }
+
+  arkaAl(anahtar, motif) {
+    const self = this;
+    const inp = document.createElement("input");
+    inp.type = "file"; inp.accept = "image/*";
+    inp.onchange = function () {
+      const dosya = inp.files && inp.files[0];
+      if (!dosya) return;
+      const fr = new FileReader();
+      fr.onload = function () {
+        const im = new Image();
+        im.onload = function () {
+          const cift = {};
+          // arka plan: 760px genişlik
+          const en = Math.min(760, im.width), boy = Math.round(im.height * en / im.width);
+          const c = document.createElement("canvas");
+          c.width = en; c.height = boy;
+          c.getContext("2d").drawImage(im, 0, 0, en, boy);
+          cift[anahtar] = c.toDataURL("image/jpeg", 0.82);
+          // şerit motifi: ortadan kare kırpma, 150px
+          if (motif) {
+            const k = Math.min(im.width, im.height);
+            const c2 = document.createElement("canvas");
+            c2.width = 150; c2.height = 150;
+            c2.getContext("2d").drawImage(im, (im.width - k) / 2, (im.height - k) / 2, k, k, 0, 0, 150, 150);
+            cift[motif] = c2.toDataURL("image/jpeg", 0.8);
+          }
+          try { self.yazCok(cift); }
+          catch (e) { window.alert("Görsel kaydedilemedi — depolama dolu olabilir. Bir iki arka planı sıfırlayıp tekrar dene."); }
+        };
+        im.src = fr.result;
+      };
+      fr.readAsDataURL(dosya);
+    };
+    inp.click();
+  }
+
+  arkaSifirla(anahtar, motif) {
+    const c = {};
+    c[anahtar] = "";
+    if (motif) c[motif] = "";
+    this.yazCok(c);
+  }
+
+  sayfaZemin(id) {
+    const ZEM = ["#fdfcfa", "#faf7f1", "#f6f4ee", "#f4f6f4", "#f3f5f8", "#f8f4f6", "#f7f5f0"];
+    const n = Math.max(0, Math.min(ZEM.length - 1, parseInt(this.al("zem-" + id), 10) || 0));
+    const self = this;
+    return {
+      bg: ZEM[n],
+      nokta: n === 0 ? "#fdfcfa" : ZEM[n],
+      t: function () { const y = (n + 1) % ZEM.length; self.yaz("zem-" + id, y ? y : false); }
+    };
+  }
+
+  renkDon(anahtar) {
+    const P = ["", "#f2dfe2", "#dde9f1", "#e2ece6", "#f6efd9", "#f7e7d8", "#e9e4f1"];
+    const su = this.al(anahtar) || "";
+    const i = Math.max(0, P.indexOf(su));
+    const self = this;
+    return {
+      bg: su || "transparent",
+      nokta: su || "#fdfcfa",
+      t: function () { const y = P[(i + 1) % P.length]; self.yaz(anahtar, y || false); }
+    };
   }
 
   __nokta(e) {
@@ -657,7 +957,27 @@ stickerAl(anahtar) {
     const DONEM = "Ajanda-dijital-donem.dc.html";
     const gunDosya = (d) => "Ajanda-dijital-gun-" + d.getUTCFullYear() + "-" + ikiHane(d.getUTCMonth() + 1) + ".dc.html";
     const haftaDosya = (i) => "Ajanda-dijital-hafta-" + (Math.floor(i / 9) + 1) + ".dc.html";
+    const TAKIP = "Ajanda-dijital-takip.dc.html";
+    const NOTLAR = "Ajanda-dijital-notlar.dc.html";
     const H = (dosya, hash) => (dosya === BU ? "" : dosya) + "#" + hash;
+
+    // ---- DEFTER İZİ
+    const DRENK = ["#c98d97","#6f9fbf","#8fae9b","#d9c079","#d9a273","#a89ac4","#7d9ea3","#c4885b"];
+    const defHam = this.al("def-list");
+    const defNo = Array.isArray(defHam) ? defHam : [];
+    const defAd = (k) => this.al("defa-" + k) || "Defter " + (k + 1);
+    const defRenk = (k) => DRENK[(parseInt(this.al("defr-" + k), 10) || 0) % DRENK.length];
+    const defGunler = {};
+    defNo.forEach((k) => {
+      const h = this.al("defg-" + k);
+      (Array.isArray(h) ? h : []).forEach((g) => {
+        if (!g || !g.t) return;
+        if (!defGunler[g.t]) defGunler[g.t] = [];
+        if (defGunler[g.t].indexOf(k) < 0) defGunler[g.t].push(k);
+      });
+    });
+    const defSira = (k) => defNo.indexOf(k) + 1;
+    const defGun = (t) => (defGunler[t] || []).map((k) => ({ ad: defAd(k), renk: defRenk(k), href: NOTLAR + "#defter-" + defSira(k) }));
 
     const bas = mk(2026, 7, 1);
     const son = mk(2027, 6, 31);
@@ -684,6 +1004,7 @@ stickerAl(anahtar) {
     const SAAT = [];
     for (let h = 6; h <= 23; h++) SAAT.push(ikiHane(h));
 
+
     const simdi = new Date();
     const bugunT = (function () {
       const t = mk(simdi.getFullYear(), simdi.getMonth(), simdi.getDate());
@@ -692,21 +1013,42 @@ stickerAl(anahtar) {
     const bugunAyIdx = (bugunT.getUTCFullYear() - 2026) * 12 + bugunT.getUTCMonth() - 7;
     const SERIT = [
       { renk: "#efe7db", href: H(ANA, "bugun") },
-      { renk: "#8fb4d4", href: H(ANA, "yil-takvim-3") },
-      { renk: "#d9c079", href: H(DONEM, (bugunT.getUTCMonth() >= 1 && bugunT.getUTCMonth() <= 6) ? "donem-2" : "donem-1") },
+      { renk: "#8fb4d4", href: H(ANA, "yil-takvim-1") },
+      { renk: "#d9c079", href: H(DONEM, "__DONEM_ILK__") },
       { renk: "#c99a9b", href: ayHref(bugunT) },
       { renk: "#a89ac4", href: haftaHref(gun(bugunT, -dow(bugunT))) },
       { renk: "#8fae9b", href: gunHref(bugunT) },
-      { renk: "#9ab7b0", href: H(ANA, "alis-" + (bugunAyIdx + 1)) },
-      { renk: "#d9a273", href: H(ANA, "bosalt") }
+      { renk: "#9ab7b0", href: H(TAKIP, "alis-" + (bugunAyIdx + 1)) },
+      { renk: "#d9a273", href: H(NOTLAR, "bosalt") }
     ];
-    const motifler = [1, 2, 3, 4, 5, 6, 7, 8].map(n => ({ mg: "sekme-motif-" + n + ".png" }));
+    const motifler = [1, 2, 3, 4, 5, 6, 7, 8].map(n => ({ mgEl: this.imgEl(this.al("mot-" + n) || ("sekme-motif-" + n + ".png"), { width: "100%", height: "100%", objectFit: "cover" }) }));
+    const KAPALI_ID = ["bugun", "yil", "donem", "ay", "hafta", "gun", "takip", "not"];
+    const kapaliHam = this.al("kapali");
+    const KAPALI = Array.isArray(kapaliHam) ? kapaliHam : [];
+    const donemAlt = ["donem-plan", "ders-programi", "enerji-haritasi"];
+    const donemAcik = donemAlt.filter(x => KAPALI.indexOf(x) < 0);
+    const takipAlt = ["t-alis", "t-para", "t-bekleyenler", "t-soylediler", "t-netuttu", "t-sozler", "ogrenci", "t-zafer"];
+    const notAlt = ["n-serbest", "n-defter", "n-beyin", "n-bosalt", "n-zorgun", "n-etiketler"];
+    const KAPALI_ETKIN = KAPALI
+      .concat(donemAcik.length === 0 ? ["donem"] : [])
+      .concat(takipAlt.every(x => KAPALI.indexOf(x) >= 0) ? ["takip"] : [])
+      .concat(notAlt.every(x => KAPALI.indexOf(x) >= 0) ? ["not"] : []);
+    const donemIlk = donemAcik.length === 0 ? "donem-1"
+      : (donemAcik[0] === "donem-plan" ? ((bugunT.getUTCMonth() >= 1 && bugunT.getUTCMonth() <= 6) ? "donem-2" : "donem-1")
+        : (donemAcik[0] === "ders-programi" ? ((bugunT.getUTCMonth() >= 1 && bugunT.getUTCMonth() <= 6) ? "program-2" : "program-1") : "enerji-1"));
+    SERIT[2].href = H(DONEM, donemIlk);
+    (function () {
+      const TUM = [2024, 2025, 2026, 2027, 2028];
+      const acik = TUM.filter(y => KAPALI.indexOf("y-" + y) < 0);
+      const i = acik.indexOf(2026);
+      SERIT[1].href = H(ANA, "yil-takvim-" + (i >= 0 ? i + 1 : 1));
+    })();
     const serit = (aktif) => SERIT.map((b, i) => ({
       ...motifler[i % motifler.length],
       renk: b.renk, href: b.href,
       op: i === aktif ? 1 : 0.5,
       ic: i === aktif ? "inset 0 -4px 0 rgba(32,30,29,0.4)" : "none"
-    }));
+    })).filter((b, i) => KAPALI_ETKIN.indexOf(KAPALI_ID[i]) < 0);
 
     const yz = (k) => this.yz(k);
     const kt = (k, r) => this.kt(k, r);
@@ -721,6 +1063,11 @@ stickerAl(anahtar) {
     const oncekiGun = (d) => { const p = gun(d, -1); return icinde(p) ? p : null; };
     const sonrakiGun = (d) => { const p = gun(d, 1); return icinde(p) ? p : null; };
 
+    const gAlisTop = Math.max(1, Math.min(14, parseInt(this.al("alis-satir"), 10) || 8));
+    const gAlisDolu = [];
+    for (let r = 0; r < gAlisTop; r++) if (this.al("hn-" + r)) gAlisDolu.push(r);
+    const gAlisHam = this.al("gun-alis-sec");
+    const gAlisSec = (Array.isArray(gAlisHam) ? gAlisHam : gAlisDolu.slice(0, 3)).filter(r => gAlisDolu.indexOf(r) >= 0);
     const gunler = liste.map(d => {
       const hb = gun(d, -dow(d));
       const t = iso(d);
@@ -737,40 +1084,114 @@ stickerAl(anahtar) {
             fg: j === dow(d) ? "#201e1d" : (icinde(dd) ? "#8d8a87" : "#d4d0cc")
           };
         }),
-        saatler: SAAT.map(s => ({
+        saatMod: this.al("gunmod-" + t) !== "serbest",
+        serbestMod: this.al("gunmod-" + t) === "serbest" ? true : "",
+        seritBaslik: this.al("gunmod-" + t) === "serbest" ? "SERBEST NOT" : "SAAT ŞERİDİ",
+        seritDegisAd: this.al("gunmod-" + t) === "serbest" ? "saat şeridi ›" : "serbest not ›",
+        seritDegis: () => this.yaz("gunmod-" + t, this.al("gunmod-" + t) === "serbest" ? false : "serbest"),
+        serbest: yz("gsn-" + t),
+        saatler: (function (self) {
+          const acik = self.al("gbuc-" + t) || [];
+          const liste = [];
+          SAAT.forEach(function (h) {
+            liste.push(h);
+            if (acik.indexOf(h) >= 0) liste.push(h + ":30");
+          });
+          return liste;
+        })(this).map(s => ({
           et: s,
-          cizgi: (s === "11" || s === "17") ? "1px solid #bdbab7" : "1px solid #f0edea",
+          cizgi: (s === "11" || s === "17") ? "1px solid #bdbab7" : (s.indexOf(":30") > 0 ? "1px dotted #f0edea" : "1px solid #f0edea"),
+          punto: s.indexOf(":30") > 0 ? "10px" : "12px",
+          bucuk: (function (self) {
+            const yarim = s.indexOf(":30") > 0;
+            const tam = yarim ? s.slice(0, 2) : s;
+            const ham = self.al("gbuc-" + t);
+            const acik = Array.isArray(ham) ? ham : [];
+            const var_ = acik.indexOf(tam) >= 0;
+            return {
+              im: yarim ? "" : (var_ ? "−" : "+"),
+              ad: var_ ? "buçuğu kaldır" : "buçuk ekle",
+              renk: var_ ? "#c99a9b" : "#ded9d4",
+              t: function () {
+                if (yarim) return;
+                const y = var_ ? acik.filter(function (x) { return x !== tam; }) : acik.concat([tam]);
+                self.yaz("gbuc-" + t, y.length ? y : false);
+              }
+            };
+          })(this),
+          renk: this.renkDon("gsr-" + t + "-" + s),
           yz: yz("s-" + t + "-" + s)
         })),
         oncelik: [0, 1, 2].map(r => ({
           kutu: kt("go-" + t + "-" + r, "#8fae9b"),
+          renk: this.renkDon("gor-" + t + "-" + r),
           ad: yz("goa-" + t + "-" + r), tah: yz("got-" + t + "-" + r), ger: yz("gog-" + t + "-" + r)
         })),
         ilk2: [0, 1, 2].map(r => ({ kutu: kt("gi-" + t + "-" + r, "#8fae9b"), yz: yz("gia-" + t + "-" + r) })),
-        yuksek: [0, 1, 2, 3].map(r => ({ kutu: kt("gy-" + t + "-" + r, "#7d9ea3"), yz: yz("gy-" + t + "-" + r + "-m"), ertele: this.ertele(t, "gy-", r) })),
-        dusuk: [0, 1, 2, 3].map(r => ({ kutu: kt("gd-" + t + "-" + r, "#a9a6a3"), yz: yz("gd-" + t + "-" + r + "-m"), ertele: this.ertele(t, "gd-", r) })),
+        yuksek: [0, 1, 2, 3].map(r => ({ kutu: kt("gy-" + t + "-" + r, "#7d9ea3"), yz: yz("gy-" + t + "-" + r + "-m"), renk: this.renkDon("gyr-" + t + "-" + r), ertele: this.ertele(t, "gy-", r) })),
+        dusuk: [0, 1, 2, 3].map(r => ({ kutu: kt("gd-" + t + "-" + r, "#a9a6a3"), yz: yz("gd-" + t + "-" + r + "-m"), renk: this.renkDon("gdr-" + t + "-" + r), ertele: this.ertele(t, "gd-", r) })),
         su: [0,1,2,3,4,5,6,7].map(r => kt("gsu-" + t + "-" + r, "#9ab7b0")),
+        uyandi: yz("guy-" + t), yatti: yz("gya-" + t),
+        defterler: defGun(t), defterVar: defGun(t).length ? true : "",
+        ...(function (self) {
+          const dk = (v) => {
+            const m = String(v || "").match(/^(\d{1,2})[:.]?(\d{2})?$/);
+            if (!m) return null;
+            const h = parseInt(m[1], 10), d = parseInt(m[2] || "0", 10);
+            if (h > 23 || d > 59) return null;
+            return h * 60 + d;
+          };
+          const k = dk(self.al("guy-" + t)), y = dk(self.al("gya-" + t));
+          if (k === null || y === null) return { uykuOran: "0%", uykuMetin: "—", uykuRenk: "#cfccc9" };
+          let sure = k - y;
+          if (sure <= 0) sure += 1440;
+          const sa = Math.floor(sure / 60), mi = sure % 60;
+          return {
+            uykuOran: Math.max(4, Math.min(100, Math.round(sure / 600 * 100))) + "%",
+            uykuMetin: sa + " sa" + (mi ? " " + mi + " dk" : ""),
+            uykuRenk: sure < 360 ? "#c07f72" : (sure > 600 ? "#a89ac4" : "#5c6b66")
+          };
+        })(this),
         enerji: [0,1,2,3,4].map(r => kt("ge-" + t + "-" + r, "#a89ac4")),
-        aliskanlik: [0, 1, 2, 3].map(r => {
-          const ad = this.al("hn-" + r);
-          return { kutu: kt("gal-" + t + "-" + r, "#c99a9b"), ad: ad || "—", renk: ad ? "#4a4744" : "#c9c5c1" };
-        }),
+        aliskanlik: gAlisSec.map(r => ({
+          kutu: kt("gal-" + t + "-" + r, "#c99a9b"),
+          ad: this.al("hn-" + r) || "—", renk: "#4a4744",
+          miktar: yz("gam-" + t + "-" + r),
+          sil: () => { const a = gAlisSec.filter(x => x !== r); this.yaz("gun-alis-sec", a.length ? a : []); }
+        })),
+        alisBos: gAlisSec.length === 0 ? true : "",
+        alisNot: gAlisDolu.length === 0 ? "takip sayfasında alışkanlık yaz" : "＋ ile alışkanlık seç",
+        alisEkle: () => {
+          const bos = gAlisDolu.find(r => gAlisSec.indexOf(r) < 0);
+          if (bos === undefined) { window.alert("Tüm alışkanlıklar zaten görünüyor."); return; }
+          this.yaz("gun-alis-sec", gAlisSec.concat([bos]));
+        },
         not: yz("gn-" + t), iyiAn: yz("gia2-" + t),
         araclar: [
-          { ad: "BOŞ SAYFA", href: ANA + "#serbest", renk: "#d9a273", t: () => this.gunSec(t) },
-          { ad: "ZOR GÜN", href: ANA + "#zorgun", renk: "#d9a273", t: () => this.gunSec(t) },
-          { ad: "BEYİN FIRTINASI", href: ANA + "#beyin", renk: "#d9a273", t: () => this.gunSec(t) },
-          { ad: "HER ŞEY", href: ANA + "#bosalt", renk: "#d9a273", t: () => this.gunSec(t) },
-          { ad: "HEP HATIRIMDA KALSIN", href: ANA + "#hatira-" + hatiraSayfa(d), renk: "#8fb4d4", t: () => {} }
-        ],
+          { g: "n-serbest", ad: "BOŞ SAYFA", href: NOTLAR + "#serbest", renk: "#d9a273", t: () => this.gunSec(t) },
+          { g: "n-defter", ad: "DEFTERLER", href: NOTLAR + "#defter", renk: "#d9a273", t: () => this.gunSec(t) },
+          { g: "n-zorgun", ad: "ZOR GÜN", href: NOTLAR + "#zorgun", renk: "#d9a273", t: () => this.gunSec(t) },
+          { g: "n-beyin", ad: "BEYİN FIRTINASI", href: NOTLAR + "#beyin", renk: "#d9a273", t: () => this.gunSec(t) },
+          { g: "n-bosalt", ad: "HER ŞEY", href: NOTLAR + "#bosalt", renk: "#d9a273", t: () => this.gunSec(t) },
+          { g: "yil", ad: "HEP HATIRIMDA KALSIN", href: ANA + "#hatira-" + hatiraSayfa(d), renk: "#8fb4d4", t: () => {} }
+        ].filter(x => KAPALI.indexOf(x.g) < 0),
         geri: oncekiGun(d) ? "‹ " + oncekiGun(d).getUTCDate() + " " + AYK[oncekiGun(d).getUTCMonth()] : "‹ Haftalar",
         geriHref: oncekiGun(d) ? gunHref(oncekiGun(d)) : haftaHref(haftaBas[0]),
         ileri: sonrakiGun(d) ? sonrakiGun(d).getUTCDate() + " " + AYK[sonrakiGun(d).getUTCMonth()] + " ›" : "Notlar ›",
-        ileriHref: sonrakiGun(d) ? gunHref(sonrakiGun(d)) : ANA + "#beyin-1"
+        ileriHref: sonrakiGun(d) ? gunHref(sonrakiGun(d)) : NOTLAR + "#beyin"
       };
     });
 
     this.fotoKur([gunler]);
+    const __zemDekor = (dz) => { if (Array.isArray(dz)) dz.forEach((p) => { if (p && p.id && !p.zemin) p.zemin = this.sayfaZemin(p.id); }); };
+    if (typeof gunler !== "undefined") __zemDekor(gunler);
+    if (typeof haftalar !== "undefined") __zemDekor(haftalar);
+    if (typeof resetler !== "undefined") __zemDekor(resetler);
+    if (typeof donemler !== "undefined") __zemDekor(donemler);
+    if (typeof programlar !== "undefined") __zemDekor(programlar);
+    if (typeof enerjiler !== "undefined") __zemDekor(enerjiler);
+    if (typeof onemliler !== "undefined") __zemDekor(onemliler);
+
     return {
       sekGun: serit(5), gunler, tocHref: ANA + "#toc",
       tocHref2: ""

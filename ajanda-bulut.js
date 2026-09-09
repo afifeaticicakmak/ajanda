@@ -13,7 +13,7 @@
   var TS = "ajanda-v3-ts";
 
   var sb = null, kul = null, durum = "yukleniyor", zamanlayici = null, sonGonderilen = null, sonHata = null;
-  var kirli = false, sonUzak = null, sonYerel = null;
+  var kirli = false, sonUzak = null, sonYerel = null, sonYazma = 0;
 
   function ts() { return Number(window.localStorage.getItem(TS) || 0); }
   function tsYaz(v) { window.localStorage.setItem(TS, String(v)); }
@@ -187,6 +187,12 @@
   }
 
   /* ---- eşitleme ---- */
+  function yaziyorMu() {
+    var a = document.activeElement;
+    if (a && (a.tagName === "INPUT" || a.tagName === "TEXTAREA" || a.isContentEditable)) return true;
+    return (Date.now() - sonYazma) < 6000;
+  }
+
   function cek(zorla) {
     return sb.from("ajanda").select("veri,guncel").eq("id", kul.id).maybeSingle().then(function (r) {
       if (r.error) { durum = "hata"; sonHata = r.error.message; ciz(); if (panel && kul) panelHesap(); return -1; }
@@ -197,7 +203,7 @@
       // bulutta bizim gönderdiğimizden başka bir kayıt var mı?
       var baskasi = (uzak !== sonUzak);
 
-      if (zorla || (baskasi && !kirli)) {
+      if (zorla || (baskasi && !kirli && !yaziyorMu())) {
         sonUzak = uzak;
         if (yeni !== ham()) {
           window.localStorage.setItem(VERI, yeni);
@@ -251,7 +257,7 @@
       setInterval(function () {
         if (!kul) return;
         var v = ham();
-        if (v !== sonYerel) { sonYerel = v; kirli = true; gonderSonra(); }
+        if (v !== sonYerel) { sonYerel = v; kirli = true; sonYazma = Date.now(); gonderSonra(); }
       }, 1500);
       setInterval(function () { if (kul && !document.hidden) cek(false); }, 6000);
       document.addEventListener("visibilitychange", function () { if (!document.hidden && kul) cek(false); });
@@ -263,7 +269,7 @@
   var asilSet = window.localStorage.setItem.bind(window.localStorage);
   window.localStorage.setItem = function (k, v) {
     asilSet(k, v);
-    if (k === VERI) { kirli = true; tsYaz(Date.now()); gonderSonra(); }
+    if (k === VERI) { kirli = true; sonYazma = Date.now(); tsYaz(Date.now()); gonderSonra(); }
   };
 
   /* ---- başlat ---- */

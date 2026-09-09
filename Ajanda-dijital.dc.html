@@ -852,6 +852,15 @@ class Component extends DCLogic {
   state = { d: (function () { try { return JSON.parse(window.localStorage.getItem("ajanda-v3") || "{}"); } catch (e) { return {}; } })(), yuk: true };
 
   componentDidMount() {
+    try {
+      if (!window.localStorage.getItem("kapak-kutu-sifir-1")) {
+        window.localStorage.setItem("kapak-kutu-sifir-1", "1");
+        const kk = (this.state.d || {})["kapak-kutu"];
+        if (kk && typeof kk === "object") {
+          this.yaz("kapak-kutu", { x: 243, y: 546, w: 512, h: 286, s: kk.s || null });
+        }
+      }
+    } catch (e) {}
     this.__disDokun();
     (function () {
       const HARITA = [

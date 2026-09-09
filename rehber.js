@@ -1,4 +1,4 @@
-(function(){if(window.matchMedia&&window.matchMedia("(max-width:520px)").matches)return;
+(function(){try{if(Math.min(screen.width,screen.height)<=500)return;}catch(e){}
 (function () {
   if (window.__rehberKurulu) return;
   window.__rehberKurulu = true;

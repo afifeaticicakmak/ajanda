@@ -2604,17 +2604,17 @@ stickerAl(anahtar) {
         const kutu = self.al("kapak-kutu") || {};
         const sk = SEK.find(function (x) { return x.k === (kutu.s || ""); }) || SEK[0];
         return {
-          kx: (typeof kutu.x === "number" ? kutu.x : 243) + "px",
-          ky: (typeof kutu.y === "number" ? kutu.y : 546) + "px",
-          kw: (typeof kutu.w === "number" ? kutu.w : 512) + "px",
-          kh: (typeof kutu.h === "number" ? kutu.h : 286) + "px",
+          kx: (typeof kutu.x === "number" ? kutu.x : 244) + "px",
+          ky: (typeof kutu.y === "number" ? kutu.y : 527) + "px",
+          kw: (typeof kutu.w === "number" ? kutu.w : 556) + "px",
+          kh: (typeof kutu.h === "number" ? kutu.h : 329) + "px",
           kr: sk.r, kri: sk.ri,
           kutuTasi: function (e) { self.kapakTasi(e); },
           kutuTut: self.state.hv === "kapak-kutu" ? "1" : "0",
           kutuGir: function () { self.setState({ hv: "kapak-kutu" }); },
           kutuCik: function () { self.setState({ hv: null }); },
           kutuBoyut: function (e) { self.kapakBoyut(e); },
-          kutuSifirla: function () { if (window.confirm("Kapak kutusu ilk boyutuna ve yerine dönsün mü?")) self.yaz("kapak-kutu", { x: 243, y: 546, w: 512, h: 286, s: kutu.s || null }); },
+          kutuSifirla: function () { if (window.confirm("Kapak kutusu ilk boyutuna ve yerine dönsün mü?")) self.yaz("kapak-kutu", ""); },
           kutuSekil: SEK.map(function (x) {
             const secili = (kutu.s || "") === x.k;
             return {
@@ -3332,7 +3332,7 @@ stickerAl(anahtar) {
 
   __telefonSuz(v) {
     var dar = false;
-    try { dar = window.matchMedia && window.matchMedia("(max-width:520px)").matches; } catch (e) {}
+    try { dar = Math.min(window.screen.width, window.screen.height) <= 500; } catch (e) {}
     if (!dar) return v;
     var hedef = (window.location.hash || "").replace(/^#/, "") || "kapak";
     var out = {};

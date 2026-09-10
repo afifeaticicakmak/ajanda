@@ -237,13 +237,6 @@ class Component extends DCLogic {
 
   state = { d: (function () { try { return JSON.parse(window.localStorage.getItem("ajanda-v3") || "{}"); } catch (e) { return {}; } })(), yuk: true };
 
-  renkDon(anahtar) {
-    const P = ["", "#f2dfe2", "#dde9f1", "#e2ece6", "#f6efd9", "#f7e7d8", "#e9e4f1"];
-    const su = this.al(anahtar) || "";
-    const i = parseInt(su, 10);
-    return P[isNaN(i) ? 0 : i % P.length] || "";
-  }
-
   componentDidMount() {
     this.__disDokun();
     (function () {
@@ -1072,7 +1065,7 @@ stickerAl(anahtar) {
           kutucuk: SAAT.map(s => ({
             cizgi: (s === "11" || s === "17") ? "1px solid #bdbab7" : "1px solid #f0edea",
             yz: yz("s-" + iso(d) + "-" + s),
-            zemin: (this.renkDon ? this.renkDon("gsr-" + iso(d) + "-" + s) : "") || "transparent"
+            zemin: this.al("gsr-" + iso(d) + "-" + s) || "transparent"
           }))
         };
       });

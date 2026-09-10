@@ -50,22 +50,25 @@
     return true;
   }
 
+  var ilkBoy = new WeakMap();
+
   function uygulaHepsi() {
     if (bosAyar()) { panelYenile(); return; }
+    var oran = genel.p / 14;
     var alan = document.querySelectorAll(SEC);
     for (var i = 0; i < alan.length; i++) {
       var el = alan[i];
       if (el.closest("#__yazi-ayar-kok")) continue;
-      var ozgun = (el.getAttribute("style") || "");
-      if (/(^|;)\s*font\s*:|font-size/i.test(ozgun) && !alanlar[anahtar(el)]) {
-        el.style.removeProperty("font-family");
-        el.style.removeProperty("font-size");
-        continue;
+      if (!ilkBoy.has(el)) {
+        var hesap = parseFloat(getComputedStyle(el).fontSize) || 14;
+        ilkBoy.set(el, hesap);
       }
-      var s = ayarAl(el);
-      var t = tipBul(s.t);
-      el.style.setProperty("font-family", t.css, "important");
-      el.style.setProperty("font-size", s.p + "px", "important");
+      var taban = ilkBoy.get(el);
+      var kendi = alanlar[anahtar(el)];
+      var tip = tipBul(kendi && kendi.t ? kendi.t : genel.t);
+      var boy = kendi && kendi.p ? kendi.p : Math.round(taban * oran);
+      el.style.setProperty("font-family", tip.css, "important");
+      el.style.setProperty("font-size", boy + "px", "important");
     }
     panelYenile();
   }

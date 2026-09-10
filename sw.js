@@ -1,6 +1,6 @@
 /* Çevrimdışı çalışması için: her açılan sayfa ve görsel önbelleğe alınır,
    sonraki açılışlarda internet olmasa da gelir. */
-const KOVA = "ajanda-v14";
+const KOVA = "ajanda-v15";
 
 self.addEventListener("install", (e) => {
   self.skipWaiting();

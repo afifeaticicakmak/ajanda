@@ -112,7 +112,7 @@ input::placeholder, textarea::placeholder { color:#cfccc9; }
               <span style="font:400 17px Lora,serif;color:{{ g.fg }}">{{ g.no }}</span>
             </a>
             <sc-for list="{{ g.kutucuk }}" as="c" hint-placeholder-count="18">
-              <span style="flex:1;min-height:0;border-bottom:{{ c.cizgi }}">
+              <span style="flex:1;min-height:0;border-bottom:{{ c.cizgi }};background:{{ c.zemin }}">
                 <input type="text" defaultValue="{{ c.yz.d }}" onBlur="{{ c.yz.b }}" style="width:100%;height:100%;box-sizing:border-box;border:none;background:transparent;font:400 11px Lora,serif;color:#201e1d;outline:none;padding:0 3px" />
               </span>
             </sc-for>
@@ -236,6 +236,13 @@ input::placeholder, textarea::placeholder { color:#cfccc9; }
 class Component extends DCLogic {
 
   state = { d: (function () { try { return JSON.parse(window.localStorage.getItem("ajanda-v3") || "{}"); } catch (e) { return {}; } })(), yuk: true };
+
+  renkDon(anahtar) {
+    const P = ["", "#f2dfe2", "#dde9f1", "#e2ece6", "#f6efd9", "#f7e7d8", "#e9e4f1"];
+    const su = this.al(anahtar) || "";
+    const i = parseInt(su, 10);
+    return P[isNaN(i) ? 0 : i % P.length] || "";
+  }
 
   componentDidMount() {
     this.__disDokun();
@@ -1064,7 +1071,8 @@ stickerAl(anahtar) {
           bg: j > 4 ? "#fbfaf8" : "transparent",
           kutucuk: SAAT.map(s => ({
             cizgi: (s === "11" || s === "17") ? "1px solid #bdbab7" : "1px solid #f0edea",
-            yz: yz("s-" + iso(d) + "-" + s)
+            yz: yz("s-" + iso(d) + "-" + s),
+            zemin: (this.renkDon ? this.renkDon("gsr-" + iso(d) + "-" + s) : "") || "transparent"
           }))
         };
       });

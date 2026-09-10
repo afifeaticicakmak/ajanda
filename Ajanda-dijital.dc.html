@@ -853,9 +853,6 @@ class Component extends DCLogic {
 
   componentDidMount() {
     var self = this;
-    this.__telefonYenile = function () { self.setState({ __hash: window.location.hash }); };
-    window.addEventListener("hashchange", this.__telefonYenile);
-    window.addEventListener("popstate", this.__telefonYenile);
     this.__disDokun();
     (function () {
       const HARITA = [
@@ -3328,27 +3325,9 @@ stickerAl(anahtar) {
       toplamBirikim: bicim(toplamBirikim), birikimYolu,
       toplamHarcama: bicim(toplamHarcama), harcamaYolu
     };
-    return this.__telefonSuz(__cikti);
+    return __cikti;
   }
 
-  __telefonSuz(v) {
-    var dar = false;
-    try { dar = Math.min(window.screen.width, window.screen.height) <= 500; } catch (e) {}
-    if (!dar) return v;
-    var hedef = (window.location.hash || "").replace(/^#/, "") || "kapak";
-    var out = {};
-    for (var k in v) {
-      var a = v[k];
-      if (Array.isArray(a) && a.length > 0 && a[0] && typeof a[0] === "object" && typeof a[0].id === "string" && a[0].id) {
-        var bul = a.filter(function (p) { return p.id === hedef; });
-        out[k] = bul.length ? bul : [];
-      } else out[k] = a;
-    }
-    var toplam = 0;
-    for (var k2 in out) if (Array.isArray(out[k2])) toplam += out[k2].length;
-    if (!toplam) { out.kapakSayfa = v.kapakSayfa; }
-    return out;
-  }
 }
 </script>
 </body>

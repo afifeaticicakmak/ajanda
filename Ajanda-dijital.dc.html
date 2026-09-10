@@ -452,7 +452,7 @@ input::placeholder, textarea::placeholder { color:#cfccc9; }
         <a href="{{ p.ileriHref }}" style="font:400 14px Lora,serif;color:#6e6b68">{{ p.ileri }}</a>
       </div>
     </div>
-  </section><sc-for list="{{ ayiricilar }}" as="p" hint-placeholder-count="8"><section class="page" id="{{ p.id }}" style="position:relative;background:#2c2a26;overflow:hidden">
+  </section></sc-for><sc-for list="{{ ayiricilar }}" as="p" hint-placeholder-count="8"><section class="page" id="{{ p.id }}" style="position:relative;background:#2c2a26;overflow:hidden">
     <span style="position:absolute;inset:0;background:#f4efe3"></span>
     <span style="position:absolute;left:0;top:0;width:1040px;height:1387px;display:block">{{ p.gorselEl2 }}</span>
     <span style="position:absolute;left:0;right:0;bottom:0;height:330px;background:linear-gradient(180deg,rgba(244,239,227,0) 0%,rgba(244,239,227,0.92) 30%,rgba(244,239,227,1) 52%)"></span>
@@ -1238,6 +1238,22 @@ stickerAl(anahtar) {
     this.yazCok(c);
   }
 
+  __dosyaGrup = "ana";
+
+  __grup(v) {
+    var dosya = (typeof this.__dosyaGrup === "string") ? this.__dosyaGrup : "ana";
+    var gYil = ["yilTakvim", "yilDikey", "hatira", "kendimeSayfa"];
+    var gAy = ["aylar", "ardindan"];
+    var digerleri = ["kapakSayfa", "bugunSayfa", "ayiricilar", "rehberSayfalar"];
+    var cikar;
+    if (dosya === "yil") cikar = gAy;
+    else if (dosya === "ay") cikar = gYil;
+    else cikar = [];
+    var out = {};
+    for (var k in v) out[k] = cikar.indexOf(k) >= 0 && Array.isArray(v[k]) ? [] : v[k];
+    return out;
+  }
+
   imgEl(src, stil) {
     if (!src) return null;
     return React.createElement("img", { src: src, alt: "", loading: "lazy", decoding: "async", style: Object.assign({ display: "block" }, stil || {}) });
@@ -1614,6 +1630,8 @@ stickerAl(anahtar) {
     const gunDosya = (d) => "Ajanda-dijital-gun-" + d.getUTCFullYear() + "-" + ikiHane(d.getUTCMonth() + 1) + ".dc.html";
     const haftaDosya = (i) => "Ajanda-dijital-hafta-" + (Math.floor(i / 9) + 1) + ".dc.html";
     const TAKIP = "Ajanda-dijital-takip.dc.html";
+    const DYIL = "Ajanda-dijital-yil.dc.html";
+    const DAY = "Ajanda-dijital-ay.dc.html";
     const NOTLAR = "Ajanda-dijital-notlar.dc.html";
     const H = (dosya, hash) => (dosya === BU ? "" : dosya) + "#" + hash;
     const SAHIP = (id) => {
@@ -3325,7 +3343,7 @@ stickerAl(anahtar) {
       toplamBirikim: bicim(toplamBirikim), birikimYolu,
       toplamHarcama: bicim(toplamHarcama), harcamaYolu
     };
-    return __cikti;
+    return this.__grup(__cikti);
   }
 
 }

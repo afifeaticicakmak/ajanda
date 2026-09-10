@@ -1,6 +1,6 @@
 {
-  "name": "Penceremden Hayatı İzliyorum",
-  "short_name": "Ajanda",
+  "name": "Journolog Planner",
+  "short_name": "Journolog",
   "start_url": "./Ajanda-dijital.dc.html",
   "scope": "./",
   "display": "standalone",
